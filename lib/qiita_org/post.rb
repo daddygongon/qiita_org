@@ -2,6 +2,7 @@
 #+begin_src ruby -n
 require "net/https"
 require "json"
+require 'command_line/global'
 
 class QiitaPost
   def get_title_tags(src)
@@ -19,16 +20,15 @@ class QiitaPost
     return title,tags
   end
 
-  def initialize(file)
+  def initialize(file, mode)
     src = file
     title, tags = get_title_tags(src)
-    p title
-    p tags
-
-    system "emacs #{src} --batch -l ~/.emacs.d/site_lisp/ox-qmd -f org-qmd-export-to-markdown --kill"
-
+    p command = "emacs #{src} --batch -l ~/.emacs.d/site_lisp/ox-qmd -f org-qmd-export-to-markdown --kill"
+    res = command_line command
+    p res
     lines = File.readlines(src.gsub('org','md'))
-    lines << "------\n - **source** #{Dir.pwd}/#{src}\n"
+    path = Dir.pwd.gsub(ENV['HOME'],'~')
+    lines << "------\n - **source** #{path}/#{src}\n"
 
     m = []
     patch = false
@@ -40,7 +40,6 @@ class QiitaPost
     end
 
     m = []
-    mode = ARGV[1]
     if mode == "open" || mode == nil
       mode = "qiita"
     end
