@@ -12,6 +12,11 @@ module QiitaOrg
       name = argv[0] || "world"
       puts "Hello #{name}."
     end
+
+    desc "post", "post to qiita from org"
+    def post(*argv)
+      file = argv[0] || "README.org"
+    end
   end
 end
 
