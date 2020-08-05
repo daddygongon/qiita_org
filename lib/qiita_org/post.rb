@@ -32,11 +32,12 @@ class QiitaPost
     end
     @access_token = @conf["access_token"]
     @teams_url = @conf["teams_url"]
+    @ox_qmd_load_path = @conf["ox_qmd_load_path"]
   end
 
   # src.org -> src.md
   def convert_org_to_md()
-    p command = "emacs #{@src} --batch -l ~/.emacs.d/ox-qmd/ox-qmd.el -f org-qmd-export-to-markdown --kill"
+    p command = "emacs #{@src} --batch -l #{@ox_qmd_load_path} -f org-qmd-export-to-markdown --kill"
     res = command_line command
     p res
   end
