@@ -18,7 +18,8 @@ module QiitaOrg
     desc "post", "post to qiita from org"
     def post(*argv)
       p file = argv[0] || "README.org"
-      QiitaPost.new(file)
+      mode = argv[1]
+      QiitaPost.new(file, option)
     end
   end
 end
