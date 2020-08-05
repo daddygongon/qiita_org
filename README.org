@@ -50,3 +50,16 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ** License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+* future features
+- qiita post => refactoring
+
+- configに登録する、git edit global. editor, mail, users...
+- qiita config access_token hogehoge
+- qiita config teams hogehoge
+- giita config =>  configを表示
+
+- cui, 変数名を適切に選ぶ，teams_path -> teams_url
+- qiita getの実装，
+
+
