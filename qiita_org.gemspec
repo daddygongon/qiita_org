@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = %q{this is qiita post gem from org.}
   spec.description = %q{qiita_org gem to post qiita from org.}
-  spec.homepage = "https://github.com/yamatoken"
+  spec.homepage = "https://github.com/yamatoken/qiita_org"
   spec.license = "MIT"
   # spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
