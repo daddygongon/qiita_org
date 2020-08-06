@@ -1,4 +1,5 @@
-#+teams_id: c90a490f23efb8f314dc
+#+qiita_id: 3ed6476464992eff3333
+#+teams_id: 55b11d5449776ec36c77
 #+OPTIONS: ^:{}
 #+STARTUP: indent nolineimages
 #+TITLE: QiitaOrg
