@@ -26,4 +26,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "> 13.0.1"
   spec.add_dependency "thor"
   spec.add_dependency "command_line", "> 2.0.0"
+  spec.add_dependency "colorize"
 end

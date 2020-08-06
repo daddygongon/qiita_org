@@ -3,11 +3,12 @@
 require "net/https"
 require "json"
 require "command_line/global"
+require "colorize"
 
 class QiitaPost
   def initialize(file, option)
     @src = file
-    @option = (option == "open")? "qiita" : option
+    @option = (option == "open" || option == "public")? "qiita" : option
   end
 
   public
@@ -60,16 +61,15 @@ class QiitaPost
   end
 
   def select_option(option)
-    qiita = (option == 'teams') ? "https://nishitani.qiita.com/" :
+    qiita = (option == "teams")? "https://nishitani.qiita.com/" :
       "https://qiita.com/"
     case option
-    when "teams","qiita",'public','open'
+    when "teams", "qiita", "public", "open"
       private = false
-    when nil,'private'
+    when nil, "private"
       private = true
     else
-      puts 'error'
-      exit
+      raise "There is no option that you appointed".red
     end
     return [qiita, private]
   end
