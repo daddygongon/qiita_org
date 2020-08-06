@@ -7,7 +7,11 @@ require "command_line/global"
 class QiitaPost
   def initialize(file, option)
     @src = file
-    @option = option
+    if option == "open"
+      @option = "qiita"
+    else
+      @option = option
+    end
     do_process()
   end
 
