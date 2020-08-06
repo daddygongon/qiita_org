@@ -10,6 +10,7 @@ class QiitaPost
     @option = (option == "open")? "qiita" : option
   end
 
+  public
   def get_title_tags()
     @conts = File.read(@src)
     @title = @conts.match(/\#\+(TITLE|title|Title): (.+)/)[2] || "テスト"
