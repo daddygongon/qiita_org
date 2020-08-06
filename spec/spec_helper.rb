@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "qiita_org"
+require "qiita_org/post"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
