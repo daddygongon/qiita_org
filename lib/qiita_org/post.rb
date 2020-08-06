@@ -60,16 +60,16 @@ class QiitaPost
   end
 
   def select_option(option)
+    qiita = (option == 'teams') ? "https://nishitani.qiita.com/" :
+      "https://qiita.com/"
     case option
-    when "teams"
-      qiita = @teams_url
+    when "teams","qiita",'public','open'
       private = false
-    when "qiita"
-      qiita = "https://qiita.com/"
-      private = false
-    else
-      qiita = "https://qiita.com/"
+    when nil,'private'
       private = true
+    else
+      puts 'error'
+      exit
     end
     return [qiita, private]
   end

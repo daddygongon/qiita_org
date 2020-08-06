@@ -13,9 +13,11 @@ RSpec.describe QiitaPost do
 
     [['qiita',["https://qiita.com/", false]],
      ["private", ["https://qiita.com/", true]],
-     ["teams", [nil, false]], # "https://nishitani.qiita.com/", false]],
+     [nil, ["https://qiita.com/", true]],
+     ["teams", ['https://nishitani.qiita.com/', false]],
      ["open",["https://qiita.com/", false]],
-     ["public",["https://qiita.com/", false]]
+     ["public",["https://qiita.com/", false]],
+     ['hoge', ["https://qiita.com/", nil]]
      ].each do |val,res|
       p [val,res]
       expect(@post.select_option(val)).to eq res
