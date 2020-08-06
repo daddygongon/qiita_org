@@ -7,7 +7,7 @@ require "command_line/global"
 class QiitaPost
   def initialize(file, option)
     @src = file
-    @option = (option == "open")? "qiita" : option
+    @option = (option == "open" || option == "public")? "qiita" : option
   end
 
   public
@@ -62,9 +62,9 @@ class QiitaPost
   def select_option(option)
     case option
     when "teams"
-      qiita = @teams_url
+      qiita = @teams_url || "https://nishitani.qiita.com/"
       private = false
-    when "qiita"
+    when "qiita", "open", "public"
       qiita = "https://qiita.com/"
       private = false
     else

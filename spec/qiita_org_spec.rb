@@ -8,12 +8,12 @@ RSpec.describe QiitaPost do
   before :each do
     @post = QiitaPost.new('test','hoge')
   end
-  
+
   it "select right option" do
 
     [['qiita',["https://qiita.com/", false]],
      ["private", ["https://qiita.com/", true]],
-     ["teams", [nil, false]], # "https://nishitani.qiita.com/", false]],
+     ["teams", ["https://nishitani.qiita.com/", false]], # [nil, false]], 
      ["open",["https://qiita.com/", false]],
      ["public",["https://qiita.com/", false]]
      ].each do |val,res|
