@@ -7,12 +7,7 @@ require "command_line/global"
 class QiitaPost
   def initialize(file, option)
     @src = file
-    if option == "open"
-      @option = "qiita"
-    else
-      @option = option
-    end
-    do_process()
+    @option = (option == "open")? "qiita" : option
   end
 
   def get_title_tags()
@@ -31,9 +26,7 @@ class QiitaPost
 
   def set_config()
     conf_path = File.join(ENV["HOME"], ".qiita.conf")
-    File.open(conf_path) do |items|
-      @conf = JSON.load(items)
-    end
+    @conf = JSON.load(File.read(conf_path))
     @access_token = @conf["access_token"]
     @teams_url = @conf["teams_url"]
     @ox_qmd_load_path = @conf["ox_qmd_load_path"]
@@ -41,7 +34,7 @@ class QiitaPost
 
   # src.org -> src.md
   def convert_org_to_md()
-    p command = "emacs #{@src} --batch -l #{@ox_qmd_load_path} -f org-qmd-export-to-markdown --kill"
+    command = "emacs #{@src} --batch -l #{@ox_qmd_load_path} -f org-qmd-export-to-markdown --kill"
     res = command_line command
     p res
   end
@@ -65,20 +58,19 @@ class QiitaPost
     end
   end
 
-  # option selector
-  def select_option()
-    @qiita = ""
-    case @option
+  def select_option(option)
+    case option
     when "teams"
-      @qiita = @teams_url
-      @private = false
+      qiita = @teams_url
+      private = false
     when "qiita"
-      @qiita = "https://qiita.com/"
-      @private = false
+      qiita = "https://qiita.com/"
+      private = false
     else
-      @qiita = "https://qiita.com/"
-      @private = true
+      qiita = "https://qiita.com/"
+      private = true
     end
+    return [qiita, private]
   end
 
   # qiita post
@@ -134,13 +126,13 @@ class QiitaPost
     end
   end
 
-  def do_process()
+  def run()
     get_title_tags()
     set_config()
     convert_org_to_md()
     add_source_path_in_md()
     select_patch_or_post()
-    select_option()
+    @qiita, @private = select_option(@option)
     qiita_post()
     get_and_print_qiita_return()
 
