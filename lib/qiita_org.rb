@@ -22,7 +22,14 @@ module QiitaOrg
       p ["in qiita_org.rb", argv]
       p file = argv[0] || "README.org"
       p mode = argv[1] || "private"
-      QiitaPost.new(file, mode).run
+      qiita = QiitaPost.new(file, mode)
+      begin
+        qiita.select_option(mode)
+      rescue RuntimeError => e
+        p e
+      else
+        qiita.run
+      end
     end
   end
 end
