@@ -69,7 +69,7 @@ class QiitaPost
     when nil, "private"
       private = true
     else
-      raise "There is no option that you appointed".red
+      raise "Unknown option: #{option}".red
     end
     return [qiita, private]
   end

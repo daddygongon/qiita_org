@@ -26,7 +26,7 @@ module QiitaOrg
       begin
         qiita.select_option(mode)
       rescue RuntimeError => e
-        p e
+        puts $!
       else
         qiita.run
       end
