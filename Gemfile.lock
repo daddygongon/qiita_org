@@ -4,6 +4,7 @@ PATH
     qiita_org (0.1.0)
       colorize
       command_line (> 2.0.0)
+      fileutils
       thor
 
 GEM
@@ -12,6 +13,7 @@ GEM
     colorize (0.8.1)
     command_line (2.0.1)
     diff-lcs (1.4.4)
+    fileutils (1.4.1)
     rake (12.3.3)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)

@@ -1,6 +1,7 @@
 require "thor"
 require "qiita_org/version"
 require "qiita_org/post"
+require "qiita_org/config"
 #require "qiita_org/qiita_org_thor"
 
 module QiitaOrg
@@ -30,6 +31,12 @@ module QiitaOrg
       else
         qiita.run
       end
+    end
+
+    desc "config", "set config"
+
+    def config(*argv)
+      QiitaConfig.new
     end
   end
 end
