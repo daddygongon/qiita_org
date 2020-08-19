@@ -2,6 +2,7 @@ require "thor"
 require "qiita_org/version"
 require "qiita_org/post"
 require "qiita_org/config"
+require "qiita_org/get"
 #require "qiita_org/qiita_org_thor"
 
 module QiitaOrg
@@ -36,7 +37,16 @@ module QiitaOrg
     desc "config", "set config"
 
     def config(*argv)
-      QiitaConfig.new
+      option = argv[0]
+      input = argv[1]
+      QiitaConfig.new(option, input)
+    end
+
+    desc "get", "get qiita report"
+
+    def get(*argv)
+      p mode = argv[0] || "qiita"
+      QiitaGet.new(mode)
     end
   end
 end

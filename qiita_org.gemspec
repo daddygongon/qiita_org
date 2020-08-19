@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "command_line", "> 2.0.0"
   spec.add_dependency "colorize"
   spec.add_dependency "fileutils"
+ # spec.add_development_dependency "pandoc", "> 2.9.2.1"
 end
