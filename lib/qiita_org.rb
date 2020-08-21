@@ -47,7 +47,8 @@ module QiitaOrg
 
     def get(*argv)
       p mode = argv[0] || "qiita"
-      QiitaGet.new(mode)
+      get =  QiitaGet.new(mode)
+      get.run
     end
 
     desc "all", "post all org file in the directory"
