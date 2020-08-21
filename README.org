@@ -1,4 +1,4 @@
-#+teams_id: 55b11d5449776ec36c77
+#+qiita_teams: 55b11d5449776ec36c77
 #+OPTIONS: ^:{}
 #+STARTUP: indent nolineimages
 #+TITLE: QiitaOrg

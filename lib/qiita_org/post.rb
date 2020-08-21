@@ -8,7 +8,7 @@ require "colorize"
 class QiitaPost
   def initialize(file, option)
     @src = file
-    @option = (option == "open" || option == "public")? "qiita" : option
+    @option = (option == "qiita" || option == "open")? "public" : option
   end
 
   public
@@ -52,7 +52,7 @@ class QiitaPost
   def select_patch_or_post()
     m = []
     @patch = false
-    if m = @conts.match(/\#\+#{@option}_id: (.+)/)
+    if m = @conts.match(/\#\+qiita_#{@option}: (.+)/)
       @qiita_id = m[1]
       @patch = true
     else
@@ -123,7 +123,7 @@ class QiitaPost
   def add_qiita_id_on_org()
     @qiita_id = @res_body["id"]
     unless @patch
-      File.write(@src, "#+#{@option}_id: #{@qiita_id}\n" + @conts)
+      File.write(@src, "#+qiita_#{@option}: #{@qiita_id}\n" + @conts)
     end
   end
 

@@ -1,4 +1,5 @@
 require "thor"
+require "colorize"
 require "qiita_org/version"
 require "qiita_org/post"
 require "qiita_org/config"
@@ -47,6 +48,21 @@ module QiitaOrg
     def get(*argv)
       p mode = argv[0] || "qiita"
       QiitaGet.new(mode)
+    end
+
+    desc "all", "post all org file in the directory"
+
+    def all(*argv)
+      Dir.glob("*.org").each do |org|
+        puts org.blue
+        if File.read(org).match(/#\+qiita_(.+)/)
+          system ("qiita post #{org} open") if File.read(org).match(/#\+(.+)_public/)
+          system ("qiita post #{org} teams") if File.read(org).match(/#\+(.+)_teams/)
+          system ("qiita post #{org} private") if File.read(org).match(/#\+(.+)_private/)
+        else
+          system ("qiita post #{org}")
+        end
+      end
     end
   end
 end
