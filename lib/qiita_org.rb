@@ -4,6 +4,7 @@ require "qiita_org/version"
 require "qiita_org/post"
 require "qiita_org/config"
 require "qiita_org/get"
+require "qiita_org/list"
 #require "qiita_org/qiita_org_thor"
 
 module QiitaOrg
@@ -64,6 +65,13 @@ module QiitaOrg
           system ("qiita post #{org}")
         end
       end
+    end
+
+    desc "list", "view qiita report list"
+
+    def list(*argv)
+      p mode = argv[0] || "qiita"
+      QiitaList.new(mode)
     end
   end
 end
