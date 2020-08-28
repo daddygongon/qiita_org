@@ -5,8 +5,9 @@ require "io/console"
 require "colorize"
 
 class QiitaGet
-  def initialize(mode)
+  def initialize(mode, id)
     @mode = mode
+    @get_id = id
   end
 
   # set config
@@ -119,10 +120,39 @@ EOS
     system "rm -f #{@id}.md"
   end
 
+  def get_id_report()
+    case @mode
+    when "teams"
+      @qiita = @teams_url
+    else
+      @qiita = "https://qiita.com/"
+    end
+    @path = "api/v2/items/#{@get_id}"
+
+    access_qiita()
+
+    @title = @items["title"]
+    @id = @items["id"]
+    @tags = []
+    @private = @items["private"]
+    @items["tags"].each do |tag|
+      @tags << tag["name"]
+    end
+    p filename = "#{@id}.md"
+    File.write(filename, @items["body"])
+    convert_md_to_org()
+    write_header_on_org()
+    puts_massage_and_delete_md()
+  end
+
   def run()
     set_config()
-    select_path()
-    access_qiita()
-    select_report()
+    if @get_id == nil
+      select_path()
+      access_qiita()
+      select_report()
+    else
+      get_id_report()
+    end
   end
 end

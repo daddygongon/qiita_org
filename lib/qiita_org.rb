@@ -48,7 +48,8 @@ module QiitaOrg
 
     def get(*argv)
       p mode = argv[0] || "qiita"
-      get =  QiitaGet.new(mode)
+      p id = argv[1] || nil
+      get =  QiitaGet.new(mode, id)
       get.run
     end
 
