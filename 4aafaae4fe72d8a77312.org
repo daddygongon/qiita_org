@@ -1,0 +1,105 @@
+#+qiita_private: 4aafaae4fe72d8a77312
+#+OPTIONS: ^:{}
+#+STARTUP: indent nolineimages
+#+TITLE: QiitaOrg
+#+AUTHOR: yamatoken
+#+EMAIL:
+#+LANGUAGE:  jp
+# +OPTIONS:   H:4 toc:t num:2
+#+OPTIONS:   toc:nil
+#+TAG: api, org, qmd
+#+SETUPFILE: ~/.emacs.d/org-mode/theme-readtheorg.setup
+
+* QiitaOrg
+  :PROPERTIES:
+  :CUSTOM_ID: qiitaorg
+  :END:
+
+Welcome to your new gem! In this directory, you'll find the files you
+need to be able to package up your Ruby library into a gem. Put your
+Ruby code in the file `lib/qiita_org\`. To experiment with that code,
+run `bin/console` for an interactive prompt.
+
+TODO: Delete this and the text above, and describe your gem
+
+** Installation
+   :PROPERTIES:
+   :CUSTOM_ID: installation
+   :END:
+
+Add this line to your application's Gemfile:
+
+#+BEGIN_SRC ruby
+  gem 'qiita_org'
+#+END_SRC
+
+And then execute:
+
+#+BEGIN_EXAMPLE
+  $  bundle install
+#+END_EXAMPLE
+
+Or install it yourself as:
+
+#+BEGIN_EXAMPLE
+  $ gem install qiita_org
+#+END_EXAMPLE
+
+** Usage
+   :PROPERTIES:
+   :CUSTOM_ID: usage
+   :END:
+
+TODO: Write usage instructions here
+
+** Development
+   :PROPERTIES:
+   :CUSTOM_ID: development
+   :END:
+
+After checking out the repo, run `bin/setup` to install dependencies.
+Then, run `rake spec` to run the tests. You can also run `bin/console`
+for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake
+install`. To release a new version, update the version number in
+`version.rb`, and then run `bundle exec rake release`, which will create
+a git tag for the version, push git commits and tags, and push the
+`.gem` file to [[https://rubygems.org][rubygems.org]].
+
+** Contributing
+   :PROPERTIES:
+   :CUSTOM_ID: contributing
+   :END:
+
+Bug reports and pull requests are welcome on GitHub at
+[[https://github.com/[USERNAME]/qiita_org]].
+
+** License
+   :PROPERTIES:
+   :CUSTOM_ID: license
+   :END:
+
+The gem is available as open source under the terms of the
+[[https://opensource.org/licenses/MIT][MIT License]].
+
+* future features
+  :PROPERTIES:
+  :CUSTOM_ID: future-features
+  :END:
+
+- qiita post => refactoring
+
+- configに登録する、git edit global. editor, mail, users...
+
+- qiita config access_token hogehoge
+
+- qiita config teams hogehoge
+
+- giita config => configを表示
+
+- cui, 変数名を適切に選ぶ，teams_path -> teams_url
+
+- qiita getの実装，------
+
+- *source* ~/Github/qiita_org/README.org

@@ -58,6 +58,7 @@ class QiitaGet
       if ans == "y"
         p @title = item["title"] #.gsub(/ |\(|\)/, " " => "_", "(" => "", ")" => "")
         @id = item["id"]
+        @author = item["user"]["id"]
         @tags = []
         @private = item["private"]
         item["tags"].each do |tag|
@@ -83,12 +84,12 @@ class QiitaGet
 #+OPTIONS: ^:{}
 #+STARTUP: indent nolineimages
 #+TITLE: #{@title}
-#+AUTHOR: Your Name
+#+AUTHOR: #{@author}
 #+EMAIL:
 #+LANGUAGE:  jp
 # +OPTIONS:   H:4 toc:t num:2
 #+OPTIONS:   toc:nil
-#+TAG: #{@tags}
+#+TAG: #{@tags.join(", ")}
 #+SETUPFILE: ~/.emacs.d/org-mode/theme-readtheorg.setup\n
 EOS
 
@@ -133,6 +134,7 @@ EOS
 
     @title = @items["title"]
     @id = @items["id"]
+    @author = @items["user"]["id"]
     @tags = []
     @private = @items["private"]
     @items["tags"].each do |tag|
