@@ -45,7 +45,7 @@ class QiitaPost
   def add_source_path_in_md()
     @lines = File.readlines(@src.gsub(".org", ".md"))
     path = Dir.pwd.gsub(ENV["HOME"], "~")
-    @lines << "\n------\n - **source** #{path}/#{@src}\n"
+    @lines << "\n\n------\n - **source** #{path}/#{@src}\n"
   end
 
   # patch or post selector by qiita_id
