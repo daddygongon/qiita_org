@@ -5,6 +5,7 @@ require "qiita_org/post"
 require "qiita_org/config"
 require "qiita_org/get"
 require "qiita_org/list"
+require "qiita_org/get_readme"
 #require "qiita_org/qiita_org_thor"
 
 module QiitaOrg
@@ -51,6 +52,12 @@ module QiitaOrg
       p id = argv[1] || nil
       get =  QiitaGet.new(mode, id)
       get.run
+    end
+
+    desc "readme", "make README.org"
+
+    def readme(*argv)
+      readme = QiitaGetReadme.new()
     end
 
     desc "all", "post all org file in the directory"
