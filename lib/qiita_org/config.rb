@@ -28,8 +28,6 @@ class QiitaConfig
     items["#{@option}"] = @input
     p conts = JSON.pretty_generate(items) #.to_json
     File.write(@setup, conts)
-   # FileUtils.cp(@setup, "# {ENV["HOME"]}/config.json")
-   # FileUtils.cp("# {ENV["HOME"]}/config.json", @setup)
     print_config("after", "green")
   end
 
