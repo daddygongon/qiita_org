@@ -1,10 +1,10 @@
 require "fileutils"
 require "colorize"
-require "io/console"
 
 class QiitaGetTemplate
   def initialize()
     cp_template()
+    check_write_header()
     check_write_contents()
   end
 
@@ -43,12 +43,39 @@ class QiitaGetTemplate
 
   def check_write_contents()
     ["MacOS", "ruby"].each do |src|
-      p "Write #{src} version?(y/n)"
-    ans = STDIN.getch
+      print "Write #{src} version?(y/n) "
+      ans = STDIN.gets.chomp
       next if ans == "n"
       if ans == "y"
         send("get_#{src.downcase}_version")
       end
     end
+  end
+
+  def check_write_header()
+    ["name", "email"].each do |src|
+      print "Write your #{src}?(y/n) "
+      ans = STDIN.gets.chomp
+      next if ans == "n"
+      if ans == "y"
+        send("get_#{src}")
+      end
+    end
+  end
+
+  def get_name()
+    conts = File.readlines("template.org")
+    p "Type your name"
+    name = STDIN.gets
+    conts[3] = "#+AUTHOR: #{name}"
+    File.write("template.org", conts.join)
+  end
+
+  def get_email()
+    conts = File.readlines("template.org")
+    p "Type your email"
+    email = STDIN.gets
+    conts[4] = "#+EMAIL:     (concat \"#{email.chomp}\")\n"
+    File.write("template.org", conts.join)
   end
 end
