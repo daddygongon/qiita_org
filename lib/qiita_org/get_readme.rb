@@ -8,7 +8,7 @@ class QiitaGetReadme
     p version = File.read("hoge.txt")
     m = []
     puts m = version.match(/ProductName:\t(.+)\nProductVersion:\t(.+)\nBuildVersion:\t(.+)\n/)
-    p m[1]
+    system 'rm hoge.txt'
 
     p lib = File.expand_path("../../../lib", __FILE__)
     p s_file = File.join(lib, "qiita_org", "template.org")
