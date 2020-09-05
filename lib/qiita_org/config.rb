@@ -31,14 +31,6 @@ class QiitaConfig
     print_config("after", "green")
   end
 
-  def set_teams_url()
-    print_config("before", "red")
-    conts = File.readlines(@setup)
-    conts[2] = "    \"teams_url\": \"#{@input}\"\n"
-    File.write(@setup, conts.join)
-    print_config("after", "green")
-  end
-
   def print_config(status, color)
     puts status if status != "now"
     conts = File.read(@setup)
@@ -54,7 +46,5 @@ class QiitaConfig
     else
       set_config()
     end
-    #set_access_token() if @option == "access_token"
-    #set_teams_url() if @option == "teams_url"
   end
 end
