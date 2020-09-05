@@ -22,11 +22,11 @@ class QiitaConfig
     end
   end
 
-  def set_access_token()
+  def set_config()
     print_config("before", "red")
     items = JSON.load(File.read(@setup))
     items["#{@option}"] = @input
-    p conts = JSON.pretty_generate(items) #.to_json
+    conts = JSON.pretty_generate(items)
     File.write(@setup, conts)
     print_config("after", "green")
   end
@@ -49,8 +49,12 @@ class QiitaConfig
   end
 
   def run()
-    check_or_copy_config() if @option == nil
-    set_access_token() if @option == "access_token"
-    set_teams_url() if @option == "teams_url"
+    if @option == nil
+      check_or_copy_config()
+    else
+      set_config()
+    end
+    #set_access_token() if @option == "access_token"
+    #set_teams_url() if @option == "teams_url"
   end
 end
