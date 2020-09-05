@@ -1,5 +1,6 @@
 require "colorize"
 require "fileutils"
+require "json"
 
 class QiitaConfig
   def initialize(option, input)
@@ -23,9 +24,12 @@ class QiitaConfig
 
   def set_access_token()
     print_config("before", "red")
-    conts = File.readlines(@setup)
-    conts[1] = "    \"access_token\": \"#{@input}\"\n"
-    File.write(@setup, conts.join)
+    items = JSON.load(File.read(@setup))
+    items["#{@option}"] = @input
+    p conts = JSON.pretty_generate(items) #.to_json
+    File.write(@setup, conts)
+   # FileUtils.cp(@setup, "# {ENV["HOME"]}/config.json")
+   # FileUtils.cp("# {ENV["HOME"]}/config.json", @setup)
     print_config("after", "green")
   end
 
