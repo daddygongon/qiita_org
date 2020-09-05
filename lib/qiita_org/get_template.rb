@@ -31,13 +31,13 @@ class QiitaGetTemplate
   # cp template.org
   def cp_template()
     lib = File.expand_path("../../../lib", __FILE__)
-    s_file = File.join(lib, "qiita_org", "template.org")
+    cp_file = File.join(lib, "qiita_org", "template.org")
 
     if File.exists?("./template.org")
       puts "template.org exists.".red
       exit
     else
-      FileUtils.cp(s_file, ".", verbose: true)
+      FileUtils.cp(cp_file, ".", verbose: true)
     end
   end
 
