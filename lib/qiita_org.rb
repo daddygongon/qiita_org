@@ -5,7 +5,7 @@ require "qiita_org/post"
 require "qiita_org/config"
 require "qiita_org/get"
 require "qiita_org/list"
-require "qiita_org/get_readme"
+require "qiita_org/get_template"
 #require "qiita_org/qiita_org_thor"
 
 module QiitaOrg
@@ -54,10 +54,10 @@ module QiitaOrg
       get.run
     end
 
-    desc "readme", "make README.org"
+    desc "template", "make template.org"
 
-    def readme(*argv)
-      readme = QiitaGetReadme.new()
+    def template(*argv)
+      template = QiitaGetTemplate.new()
     end
 
     desc "all", "post all org file in the directory"
