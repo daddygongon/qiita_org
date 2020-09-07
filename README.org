@@ -1,3 +1,4 @@
+#+qiita_private: f4f8745f0bd90b077fc5
 #+qiita_teams: 55b11d5449776ec36c77
 #+OPTIONS: ^:{}
 #+STARTUP: indent nolineimages

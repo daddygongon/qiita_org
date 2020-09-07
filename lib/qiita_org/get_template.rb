@@ -15,17 +15,19 @@ class QiitaGetTemplate
     m = version.match(/ProductName:\t(.+)\nProductVersion:\t(.+)\nBuildVersion:\t(.+)\n/)
     system 'rm hoge.txt'
     conts = File.read("template.org")
-    File.write("template.org", conts + "#{m[1]}: #{m[2]}\n")
+    conts << "\n![#{m[1]}-#{m[2]}](https://img.shields.io/badge/#{m[1].gsub(" ", "")}-#{m[2]}-brightgreen)\n"
+    File.write("template.org", conts) # + "# {m[1]}: # {m[2]}\n")
   end
 
   def get_ruby_version()
     system 'ruby --version > hoge.txt'
     version = File.read("hoge.txt")
     m = []
-    m = version.match(/ruby (.+)/)
+    m = version.match(/ruby (.+) \((.+)/)
     system 'rm hoge.txt'
     conts = File.read("template.org")
-    File.write("template.org", conts + "ruby: #{m[1]}\n")
+    conts << "\n![ruby-#{m[1]}](https://img.shields.io/badge/ruby-#{m[1].gsub(" ", "")}-brightgreen)\n"
+    File.write("template.org", conts) # + "ruby: # {m[1]}\n")
   end
 
   # cp template.org
