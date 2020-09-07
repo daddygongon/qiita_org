@@ -1,5 +1,7 @@
 {
-    "access_token":
-    "teams_url":
+    "name": "",
+    "email": "",
+    "access_token": "",
+    "teams_url": "",
     "ox_qmd_load_path": "~/.emacs.d/site_lisp/ox-qmd"
 }
