@@ -33,6 +33,11 @@ class QiitaConfig
 
   def print_config(status, color)
     puts status if status != "now"
+
+    items = JSON.load(File.read(@setup))
+    format = JSON.pretty_generate(items)
+    File.write(@setup, format)
+
     conts = File.read(@setup)
     adjust_conts = conts.gsub(/{|}|,/, "{" => "", "}" => "", "," => "")
     puts adjust_conts if color == "black"
