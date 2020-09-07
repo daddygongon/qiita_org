@@ -1,0 +1,17 @@
+#+qiita_private: b5dfc5df8a0e569bc54c
+#+OPTIONS: ^:{}
+#+STARTUP: indent nolineimages
+#+TITLE: title
+#+AUTHOR: Your Name
+#+EMAIL:     (concat "hogehoge@example.com")
+#+LANGUAGE:  jp
+# +OPTIONS:   H:4 toc:t num:2
+#+OPTIONS:   toc:nil
+#+TAG: tag1, tag2
+#+SETUPFILE: ~/.emacs.d/org-mode/theme-readtheorg.setup
+
+* 環境
+
+![Mac OS X-10.13.3](https://img.shields.io/badge/MacOSX-10.13.3-brightgreen)
+
+![ruby-2.7.0p0](https://img.shields.io/badge/ruby-2.7.0p0-brightgreen)
