@@ -4,7 +4,8 @@ require "colorize"
 class QiitaGetTemplate
   def initialize()
     cp_template()
-    check_write_header()
+    set_name_and_email()
+    # check_write_header()
     check_write_contents()
   end
 
@@ -78,6 +79,17 @@ class QiitaGetTemplate
     p "Type your email"
     email = STDIN.gets
     conts[4] = "#+EMAIL:     (concat \"#{email.chomp}\")\n"
+    File.write("template.org", conts.join)
+  end
+
+  def set_name_and_email()
+    conf_path = File.join(ENV["HOME"], ".qiita.conf")
+    conf = JSON.load(File.read(conf_path))
+    name = conf["name"]
+    email = conf["email"]
+    conts = File.readlines("template.org")
+    conts[3] = "#+AUTHOR: #{name}\n"
+    conts[4] = "#+EMAIL:     (concat \"#{email}\")\n"
     File.write("template.org", conts.join)
   end
 end
