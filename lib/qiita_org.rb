@@ -41,7 +41,7 @@ module QiitaOrg
 
     def config(*argv)
       option = argv[0] || nil
-      input = argv[1]
+      input = [argv[1], argv[2], argv[3]]
       config =  QiitaConfig.new(option, input)
       config.run
     end

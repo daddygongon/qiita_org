@@ -25,7 +25,7 @@ class QiitaConfig
   def set_config()
     print_config("before", "red")
     items = JSON.load(File.read(@setup))
-    items["#{@option}"] = @input
+    items["#{@option}"] = @input.join(" ").strip
     conts = JSON.pretty_generate(items)
     File.write(@setup, conts)
     print_config("after", "green")
