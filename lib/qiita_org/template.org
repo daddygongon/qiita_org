@@ -9,4 +9,3 @@
 #+TAG: tag1, tag2
 #+SETUPFILE: ~/.emacs.d/org-mode/theme-readtheorg.setup
 
-* 環境
