@@ -16,7 +16,7 @@ class QiitaGetTemplate
     m = version.match(/ProductName:\t(.+)\nProductVersion:\t(.+)\nBuildVersion:\t(.+)\n/)
     system 'rm hoge.txt'
     conts = File.read("template.org")
-    conts << "![#{m[1]}-#{m[2]}](https://img.shields.io/badge/#{m[1].gsub(" ", "")}-#{m[2]}-brightgreen)"
+    conts << "![#{m[1]}-#{m[2]}](https://img.shields.io/badge/#{m[1].gsub(" ", "")}-#{m[2]}-brightgreen) "
     File.write("template.org", conts) # + "# {m[1]}: # {m[2]}\n")
   end
 
@@ -27,7 +27,7 @@ class QiitaGetTemplate
     m = version.match(/ruby (.+) \((.+)/)
     system 'rm hoge.txt'
     conts = File.read("template.org")
-    conts << " ![ruby-#{m[1]}](https://img.shields.io/badge/ruby-#{m[1].gsub(" ", "")}-brightgreen)"
+    conts << "![ruby-#{m[1]}](https://img.shields.io/badge/ruby-#{m[1].gsub(" ", "")}-brightgreen) "
     File.write("template.org", conts) # + "ruby: # {m[1]}\n")
   end
 
