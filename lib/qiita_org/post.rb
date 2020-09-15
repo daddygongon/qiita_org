@@ -77,7 +77,7 @@ class QiitaPost
   # qiita post
   def qiita_post()
     params = {
-      "body": @lines.join.gsub("\\\\", "").gsub("\\", ""), #"# テスト",
+      "body": @lines.join.gsub("\\\\", ""), #.gsub("\\", ""), #"# テスト",
       "private": @private,
       "title": @title,
       "tags": @tags,
