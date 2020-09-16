@@ -18,7 +18,7 @@ class QiitaPost
     m = []
     @tags = if m = @conts.match(/\#\+(TAG|tag|Tag|tags|TAGS|Tags): (.+)/)
         if m[2].count(",") >= 5
-          p "The maximum number of tags is five. Please edit tags"
+          p "The maximum number of tags is five. Please delete some tags.".red
           exit
         end
         m[2].split(",").inject([]) do |l, c|
