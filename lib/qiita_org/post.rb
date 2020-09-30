@@ -4,11 +4,15 @@ require "net/https"
 require "json"
 require "command_line/global"
 require "colorize"
+require "qiita_org/search_conf_path.rb"
 
 class QiitaPost
   def initialize(file, option)
     @src = file
     @option = (option == "qiita" || option == "open")? "public" : option
+    search = SearchConfPath.new(Dir.pwd, Dir.home)
+    @conf_dir = search.search_conf_path()
+    p @conf_dir
   end
 
   public
@@ -31,7 +35,7 @@ class QiitaPost
   end
 
   def set_config()
-    conf_path = File.join(ENV["HOME"], ".qiita.conf")
+    conf_path = File.join(@conf_dir, ".qiita.conf")
     @conf = JSON.load(File.read(conf_path))
     @access_token = @conf["access_token"]
     @teams_url = @conf["teams_url"]
@@ -65,8 +69,9 @@ class QiitaPost
   end
 
   def select_option(option)
-    qiita = (option == "teams")? "https://nishitani.qiita.com/" :
-      "https://qiita.com/"
+    qiita = (option == "teams")? @teams_url : "https://qiita.com/"
+    #qiita = (option == "teams")? "https://nishitani.qiita.com/" :
+     # "https://qiita.com/"
     case option
     when "teams", "qiita", "public", "open"
       private = false

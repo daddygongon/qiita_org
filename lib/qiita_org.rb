@@ -40,9 +40,10 @@ module QiitaOrg
     desc "config", "set config"
 
     def config(*argv)
-      option = argv[0] || nil
-      input = [argv[1], argv[2], argv[3]]
-      config =  QiitaConfig.new(option, input)
+      status = argv[0] || "local"
+      option = argv[1] || nil
+      input = [argv[2], argv[3], argv[4]]
+      config =  QiitaConfig.new(status, option, input)
       config.run
     end
 

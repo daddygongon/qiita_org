@@ -3,10 +3,20 @@ require "fileutils"
 require "json"
 
 class QiitaConfig
-  def initialize(option, input)
+  def initialize(status, option, input)
     @option = option
     @input = input
-    @setup = "#{ENV["HOME"]}/.qiita.conf"
+    if status == "local"
+      search = SearchConfPath.new(Dir.pwd, Dir.home)
+      conf_dir = search.search_conf_path()
+      if conf_dir == Dir.home
+        @setup = File.join(Dir.pwd, ".qiita.conf")
+      else
+        @setup = File.join(conf_dir, ".qiita.conf")
+      end
+    else
+      @setup = File.join(Dir.home, ".qiita.conf")
+    end
   end
 
   # check qiita.conf or copy qiita.conf
@@ -14,7 +24,7 @@ class QiitaConfig
     lib = File.expand_path("../../../lib", __FILE__)
     cp_file = File.join(lib, "qiita_org", ".qiita.conf")
 
-    if File.exists?("#{ENV["HOME"]}/.qiita.conf")
+    if File.exists?(@setup) # "# {ENV["HOME"]}/.qiita.conf")
       puts @setup.green
       print_config("now", "black")
     else
