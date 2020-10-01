@@ -1,9 +1,12 @@
 require "fileutils"
 require "colorize"
+require "qiita_org/search_conf_path"
 
 class QiitaGetTemplate
   def initialize()
     cp_template()
+    search = SearchConfPath.new(Dir.pwd, Dir.home)
+    @conf_dir = search.search_conf_path()
     set_name_and_email()
     # check_write_header()
     check_write_contents()
@@ -83,7 +86,7 @@ class QiitaGetTemplate
   end
 
   def set_name_and_email()
-    conf_path = File.join(ENV["HOME"], ".qiita.conf")
+    conf_path = File.join(@conf_dir, ".qiita.conf")
     conf = JSON.load(File.read(conf_path))
     name = conf["name"]
     email = conf["email"]
