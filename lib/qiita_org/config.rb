@@ -9,7 +9,7 @@ class QiitaConfig
     if status == "local"
       search = SearchConfPath.new(Dir.pwd, Dir.home)
       conf_dir = search.search_conf_path()
-      if conf_dir == Dir.home
+      if conf_dir == Dir.home || @option == "set"
         @setup = File.join(Dir.pwd, ".qiita.conf")
       else
         @setup = File.join(conf_dir, ".qiita.conf")
@@ -56,7 +56,7 @@ class QiitaConfig
   end
 
   def run()
-    if @option == nil
+    if @option == nil || @option == "set"
       check_or_copy_config()
     else
       set_config()
