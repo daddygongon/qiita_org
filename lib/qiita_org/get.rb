@@ -3,16 +3,19 @@ require "json"
 require "open-uri"
 require "io/console"
 require "colorize"
+require "qiita_org/search_conf_path.rb"
 
 class QiitaGet
   def initialize(mode, id)
     @mode = mode
     @get_id = id
+    search = SearchConfPath.new(Dir.pwd, Dir.home)
+    @conf_dir = search.search_conf_path()
   end
 
   # set config
   def set_config()
-    conf_path = File.join(ENV["HOME"], ".qiita.conf")
+    conf_path = File.join(@conf_dir, ".qiita.conf")
     conf = JSON.load(File.read(conf_path))
     @access_token = conf["access_token"]
     @teams_url = conf["teams_url"]
