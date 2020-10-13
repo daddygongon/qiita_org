@@ -39,7 +39,8 @@ class QiitaPost
     @conf = JSON.load(File.read(conf_path))
     @access_token = @conf["access_token"]
     @teams_url = @conf["teams_url"]
-    @ox_qmd_load_path = @conf["ox_qmd_load_path"]
+    lib = File.expand_path("../../../lib", __FILE__)
+    @ox_qmd_load_path = File.join(lib, "qiita_org", "ox-qmd", "ox-qmd") # @conf["ox_qmd_load_path"]
   end
 
   # src.org -> src.md
