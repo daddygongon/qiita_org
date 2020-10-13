@@ -17,7 +17,8 @@ module QiitaOrg
     #
     def initialize(*argv)
       super(*argv)
-      @checkos = CheckPcOs.new
+      checkos = CheckPcOs.new
+      @os = checkos.return_os()
     end
 
     desc "say_hello", "say_hello"
@@ -30,11 +31,10 @@ module QiitaOrg
     desc "post", "post to qiita from org"
 
     def post(*argv)
-      os = @checkos.return_os()
       p ["in qiita_org.rb", argv]
       p file = argv[0] || "README.org"
       p mode = argv[1] || "private"
-      qiita = QiitaPost.new(file, mode, os)
+      qiita = QiitaPost.new(file, mode, @os)
       begin
         qiita.select_option(mode)
       rescue RuntimeError => e
@@ -66,7 +66,7 @@ module QiitaOrg
     desc "template", "make template.org"
 
     def template(*argv)
-      template = QiitaGetTemplate.new()
+      template = QiitaGetTemplate.new(@os)
     end
 
     desc "all", "post all org file in the directory"

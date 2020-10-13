@@ -3,7 +3,8 @@ require "colorize"
 require "qiita_org/search_conf_path"
 
 class QiitaGetTemplate
-  def initialize()
+  def initialize(os)
+    @os = os
     cp_template()
     search = SearchConfPath.new(Dir.pwd, Dir.home)
     @conf_dir = search.search_conf_path()
@@ -21,6 +22,32 @@ class QiitaGetTemplate
     conts = File.read("template.org")
     conts << "![#{m[1]}-#{m[2]}](https://img.shields.io/badge/#{m[1].gsub(" ", "")}-#{m[2]}-brightgreen) "
     File.write("template.org", conts) # + "# {m[1]}: # {m[2]}\n")
+  end
+
+  def get_windowsos_version()
+    system 'wmic.exe os get caption > hoge1.txt'
+    system 'wmic.exe os get osarchitecture > hoge2.txt'
+    version1 = File.read("hoge1.txt")
+    version2 = File.read("hoge2.txt")
+    m1, m2 = [], []
+    m1 = version1.match(/Caption\nMicrosoft (.+) (.+)/)
+    m2 = version2.match(/OSArchitecture\n(.+)-bit/)
+    system 'rm hoge1.txt'
+    system 'rm hoge2.txt'
+    conts = File.read("template.org")
+    conts << "![#{m1[1]}-#{m1[2]}](https://img.shields.io/badge/#{m1[1].gsub(" ", "")}#{m1[2]}-#{m2[1]}bit-brightgreen) "
+    File.write("template.org", conts) # + "# {m[1]}: # {m[2]}\n")
+  end
+
+  def get_ubuntu_version()
+    system 'cat /etc/issue > hoge.txt'
+    version = File.read("hoge.txt")
+    m = []
+    m = version.match(/(.+) (.+) LTS /)
+    system 'rm hoge.txt'
+    conts = File.read("template.org")
+    conts << "![#{m[1]}-#{m[2]}](https://img.shields.io/badge/#{m[1]}-#{m[2]}-brightgreen) "
+    File.write("template.org", conts)
   end
 
   def get_ruby_version()
@@ -48,12 +75,32 @@ class QiitaGetTemplate
   end
 
   def check_write_contents()
-    ["MacOS", "ruby"].each do |src|
-      print "Write #{src} version?(y/n) "
-      ans = STDIN.gets.chomp
-      next if ans == "n"
-      if ans == "y"
-        send("get_#{src.downcase}_version")
+    if @os == "mac"
+      ["MacOS", "ruby"].each do |src|
+        print "Write #{src} version?(y/n) "
+        ans = STDIN.gets.chomp
+        next if ans == "n"
+        if ans == "y"
+          send("get_#{src.downcase}_version")
+        end
+      end
+    elsif @os == "windows"
+      ["WindowsOS", "Ubuntu", "ruby"].each do |src|
+        print "Write #{src} version?(y/n) "
+        ans = STDIN.gets.chomp
+        next if ans == "n"
+        if ans == "y"
+          send("get_#{src.downcase}_version")
+        end
+      end
+    else
+      ["ruby"].each do |src|
+        print "Write #{src} version?(y/n) "
+        ans = STDIN.gets.chomp
+        next if ans == "n"
+        if ans == "y"
+          send("get_#{src.downcase}_version")
+        end
       end
     end
   end
