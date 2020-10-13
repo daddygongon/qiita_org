@@ -86,7 +86,7 @@ class QiitaGetTemplate
         end
       end
     elsif @os == "windows"
-      ["ruby"].each do |src|
+      ["Ubuntu", "ruby"].each do |src|
         print "Write #{src} version?(y/n) "
         ans = STDIN.gets.chomp
         next if ans == "n"
