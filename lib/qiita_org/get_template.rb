@@ -1,5 +1,6 @@
 require "fileutils"
 require "colorize"
+require "kconv"
 require "qiita_org/search_conf_path"
 
 class QiitaGetTemplate
@@ -27,8 +28,8 @@ class QiitaGetTemplate
   def get_windowsos_version()
     system 'wmic.exe os get caption > hoge1.txt'
     system 'wmic.exe os get osarchitecture > hoge2.txt'
-    version1 = File.read("hoge1.txt")
-    version2 = File.read("hoge2.txt")
+    version1 = Kconv.tosjis(File.read("hoge1.txt"))
+    version2 = Kconv.tosjis(File.read("hoge2.txt"))
     m1, m2 = [], []
     m1 = version1.match(/Caption\nMicrosoft (.+) (.+)/)
     m2 = version2.match(/OSArchitecture\n(.+)-bit/)
