@@ -7,9 +7,10 @@ require "colorize"
 require "qiita_org/search_conf_path.rb"
 
 class QiitaPost
-  def initialize(file, option)
+  def initialize(file, option, os)
     @src = file
     @option = (option == "qiita" || option == "open")? "public" : option
+    @os = os
     search = SearchConfPath.new(Dir.pwd, Dir.home)
     @conf_dir = search.search_conf_path()
     p @conf_dir
@@ -137,6 +138,17 @@ class QiitaPost
     end
   end
 
+  # open qiita
+  def open_qiita()
+    if @os == "mac"
+      system "open #{@res_body["url"]}"
+    elsif @os == "windows"
+      system "explorer.exe #{@res_body["url"]}"
+    else
+      system "open #{@res_body["url"]}"
+    end
+  end
+
   def run()
     get_title_tags()
     set_config()
@@ -147,8 +159,7 @@ class QiitaPost
     qiita_post()
     get_and_print_qiita_return()
 
-    # open qiitta
-    system "open #{@res_body["url"]}"
+    open_qiita()
 
     add_qiita_id_on_org()
   end

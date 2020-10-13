@@ -6,6 +6,7 @@ require "qiita_org/config"
 require "qiita_org/get"
 require "qiita_org/list"
 require "qiita_org/get_template"
+require "qiita_org/check_pc_os"
 #require "qiita_org/qiita_org_thor"
 
 module QiitaOrg
@@ -14,6 +15,11 @@ module QiitaOrg
     #      super(*argv)
     #    end
     #
+    def initialize(*argv)
+      super(*argv)
+      @checkos = CheckPcOs.new
+    end
+
     desc "say_hello", "say_hello"
 
     def say_hello(*name)
@@ -24,10 +30,11 @@ module QiitaOrg
     desc "post", "post to qiita from org"
 
     def post(*argv)
+      os = @checkos.return_os()
       p ["in qiita_org.rb", argv]
       p file = argv[0] || "README.org"
       p mode = argv[1] || "private"
-      qiita = QiitaPost.new(file, mode)
+      qiita = QiitaPost.new(file, mode, os)
       begin
         qiita.select_option(mode)
       rescue RuntimeError => e
