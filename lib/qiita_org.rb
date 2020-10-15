@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require "thor"
 require "colorize"
 require "qiita_org/version"
@@ -28,7 +29,7 @@ module QiitaOrg
       puts "Hello #{name}."
     end
 
-    desc "post", "post to qiita from org"
+    desc "post [FILE] [private/public/teams]", "post to qiita from org"
 
     def post(*argv)
       p ["in qiita_org.rb", argv]
@@ -44,7 +45,7 @@ module QiitaOrg
       end
     end
 
-    desc "config", "set config"
+    desc "config [global/local] [option] [input]", "set config"
 
     def config(*argv)
       status = argv[0] || "local"
@@ -54,7 +55,7 @@ module QiitaOrg
       config.run
     end
 
-    desc "get", "get qiita report"
+    desc "get [qiita/teams] [記事のID]", "get qiita report"
 
     def get(*argv)
       p mode = argv[0] || "qiita"
@@ -84,7 +85,7 @@ module QiitaOrg
       end
     end
 
-    desc "list", "view qiita report list"
+    desc "list [qiita/teams]", "view qiita report list"
 
     def list(*argv)
       p mode = argv[0] || "qiita"
