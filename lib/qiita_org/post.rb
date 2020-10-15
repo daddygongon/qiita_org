@@ -146,6 +146,7 @@ class QiitaPost
       system "explorer.exe #{@res_body["url"]}"
     else
       system "open #{@res_body["url"]}"
+      system "xdg-open #{@res_body["url"]}"
     end
   end
 
