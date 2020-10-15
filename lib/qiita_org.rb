@@ -8,6 +8,7 @@ require "qiita_org/get"
 require "qiita_org/list"
 require "qiita_org/get_template"
 require "qiita_org/check_pc_os"
+require "qiita_org/version"
 #require "qiita_org/qiita_org_thor"
 
 module QiitaOrg
@@ -18,8 +19,6 @@ module QiitaOrg
     #
     def initialize(*argv)
       super(*argv)
-      checkos = CheckPcOs.new
-      @os = checkos.return_os()
     end
 
     desc "say_hello", "say_hello"
@@ -32,10 +31,13 @@ module QiitaOrg
     desc "post [FILE] [private/public/teams]", "post to qiita from org"
 
     def post(*argv)
+      checkos = CheckPcOs.new
+      os = checkos.return_os()
+
       p ["in qiita_org.rb", argv]
       p file = argv[0] || "README.org"
       p mode = argv[1] || "private"
-      qiita = QiitaPost.new(file, mode, @os)
+      qiita = QiitaPost.new(file, mode, os)
       begin
         qiita.select_option(mode)
       rescue RuntimeError => e
@@ -67,7 +69,10 @@ module QiitaOrg
     desc "template", "make template.org"
 
     def template(*argv)
-      template = QiitaGetTemplate.new(@os)
+      checkos = CheckPcOs.new
+      os = checkos.return_os()
+
+      template = QiitaGetTemplate.new(os)
     end
 
     desc "all", "post all org file in the directory"
@@ -90,6 +95,12 @@ module QiitaOrg
     def list(*argv)
       p mode = argv[0] || "qiita"
       QiitaList.new(mode)
+    end
+
+    desc "version", "show version"
+
+    def version
+      puts QiitaOrg::VERSION
     end
   end
 end
