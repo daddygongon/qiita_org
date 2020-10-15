@@ -1,42 +1,38 @@
+
+
 # QiitaOrg
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file \`lib/qiita\_org\\\`. To experiment with that code, run \`bin/console\` for an interactive prompt.
+\![Mac OS X-10.13.3](<https://img.shields.io/badge/MacOSX-10.13.3-brightgreen>) \![ruby-2.7.0p0](<https://img.shields.io/badge/ruby-2.7.0p0-brightgreen>) \![qiita\_org version](<https://img.shields.io/badge/qiitaorg-0.1.8-brightgreen>)
 
-TODO: Delete this and the text above, and describe your gem
 
-## Installation
+## 概要
 
-Add this line to your application's Gemfile:
+qiita\_orgはqiitaへの投稿にあたって，テキストの作成から投稿までをterminal上で一括で行いたいというコンセプトでできたgemです．
 
-```ruby
-gem 'qiita_org'
-```
+emacs org-modeで作成したテキストをCUIでqiitaに投稿します．
 
-And then execute:
+注意点:command\_lineを使用しているのでrubyのバージョンは2.4.0以上にしてください．また，emacsのバージョンは26.3以上をお勧めします．
 
-    $  bundle install
 
-Or install it yourself as:
+## 使用例
 
-    $ gem install qiita_org
+まず，org-modeの投稿用テンプレートを取得します．'qiita template'とコマンドを打ち，環境を書き込むかを決めtemplate.orgを作成します．![img](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/76dc9d92-3a77-5523-7a21-571f691402bb.png)
 
-## Usage
+すると，このようなorgが作成されます．![img](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/4a38e62f-9cae-1bf1-ee51-080706c64f6f.png)
 
-TODO: Write usage instructions here
+ここのtitle,tagをqiitaに載せる用のものに変更してあとは従来通り本文を書くだけ．
 
-## Development
+本文が作成できたら，あとは投稿用のコマンドを実行するだけ．試しに限定共有投稿へ投稿してみるとこんな感じ．![img](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/3f7179f4-e150-7a63-b8ba-e936b925d7be.png)
 
-After checking out the repo, run \`bin/setup\` to install dependencies. Then, run \`rake spec\` to run the tests. You can also run \`bin/console\` for an interactive prompt that will allow you to experiment.
+ズラズラーっと出ますが，設定がちゃんとできていれば投稿が完了し，Safariで投稿したページが開きます．
 
-To install this gem onto your local machine, run \`bundle exec rake install\`. To release a new version, update the version number in \`version.rb\`, and then run \`bundle exec rake release\`, which will create a git tag for the version, push git commits and tags, and push the \`.gem\` file to [rubygems.org](<https://rubygems.org>).
+投稿した記事にはSouceとしてどこのディレクトリに元のorgテキストがあるか表示されるので，少し前の記事を編集したい時でも便利なはず．．．
 
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at <https://github.com/[USERNAME]/qiita_org>.
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](<https://opensource.org/licenses/MIT>).
+
 
 # future features
 
@@ -49,3 +45,4 @@ The gem is available as open source under the terms of the [MIT License](<https:
 
 -   cui, 変数名を適切に選ぶ，teams\_path -> teams\_url
 -   qiita getの実装，
+
