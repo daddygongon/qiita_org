@@ -29,9 +29,170 @@ emacs org-modeで作成したテキストをCUIでqiitaに投稿します．
 投稿した記事にはSouceとしてどこのディレクトリに元のorgテキストがあるか表示されるので，少し前の記事を編集したい時でも便利なはず．．．
 
 
-## License
+## インストール
 
-The gem is available as open source under the terms of the [MIT License](<https://opensource.org/licenses/MIT>).
+```bash
+gem install qiita_org
+```
+
+get commandにpandocを使っているのでインストールしてください．macなら
+
+```bash
+brew install pandoc
+```
+
+ubuntuなら
+
+```bash
+sudo apt update
+sudo apt install pandoc
+```
+
+
+## 設定ファイルの作成
+
+```bash
+qiita config global
+```
+
+とし，設定ファイルをホームディレクトリに作成する．
+
+
+### Qiitaのアクセストークンの作成方法と設定ファイルへの書き込み
+
+[<https://qiita.com/settings/applications>](<https://qiita.com/settings/applications>)にて
+
+個人用アクセストークンの'新しくトークンを発行する'をクリック．![img](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/de93b61e-b42d-8364-7282-ee1bdbd572ad.png)
+
+アクセストークンの説明を書き，スコープのところは画像のように全てにチェックを入れる．その後発行をおす．![img](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/7012077d-fba8-e823-d29c-dc93939b4d6b.png)
+
+ページが移動すると個人用アクセストークンのところにアクセストークンが表示されているので，コピーしてください．（この文字列はページを移動すると再表示できなくなるので注意してください．）
+
+ターミナルに戻り，以下のように実行．
+
+```bash
+qiita config global access_token 'your accesstoken'
+```
+
+'your accesstoken'のところには先ほどコピーしたアクセストークンをペーストしてください．
+
+
+### 名前の登録
+
+```bash
+qiita config global name 'your name'
+```
+
+
+### メールアドレスの登録
+
+```bash
+qiita config global email 'your email'
+```
+
+
+### QiitaTeamURLの登録
+
+'teams'というoptionを使うために必要なので，所属しているQiitaTeamがあるのならこの設定を行なってください．なければ設定しなくて大丈夫です．
+
+```bash
+qiita config global teams_url 'https://foge.qiita.com/'
+```
+
+URLは最後に'/'をつけるのを忘れないように注意してください．
+
+
+### localの設定ファイルを作る方法
+
+複数のTeamに所属している場合や，ディレクトリごとにメールアドレスを設定したい場合があればlocalの設定ファイルを指定できます．
+
+設定ファイルを作りたいディレクトリにて，
+
+```bash
+qiita config local set
+```
+
+とし，上記の初期設定のglobalをlocalに変えてそのほかを同じように書き込んでいくとできます．
+
+
+# コマンド一覧
+
+-   qiita all
+-   qiita config [global/local] [option] [input]
+-   qiita get [qiita/teams] [記事のID]
+-   qiita list [qiita/teams]
+-   qiita post [FILE] [private/public/teams]
+-   qiita template
+
+
+## qiita all
+
+カレントディレクトリ内の全てのorgファイルをqiitaに投稿するコマンドです．
+
+orgファイル内にidの記載のあるものは記事の更新，id記載のないものに関しては全て限定共有投稿に投稿されます．
+
+
+## qiita config
+
+qiita\_orgの設定ファイルの作成と確認を行うコマンドです．
+
+設定方法については[<https://qiita.com/yamatoken/items/858692178d288c40714d>](<https://qiita.com/yamatoken/items/858692178d288c40714d>)を参照してください．
+
+
+## qiita get
+
+Qiitaの記事を取得するためのコマンドです．
+
+
+## 特定記事の取得方法
+
+qiita get [qiita/teams] [記事のID]
+
+実行することで指定した記事をid.orgとしてディレクトリ内に作成します．
+
+
+## 複数記事の取得方法
+
+自分のQiitaもしくはQiitaTeamの記事を最新から100個まで表示し取得できます．
+
+qiita get [qiita/teams]
+
+実行するとタイトルが表示されるので，保存したければ'y'いらなければ'n'を入力する．終了は'e'
+
+
+## qiita list
+
+自分のQiitaもしくはQiitaTeamの記事を最新から100個までterminal上に表示するコマンドです．
+
+qiita list [qiita/teams]
+
+実行するとオプションがqiitaならtitle, URL, 記事の元となったorgファイルの場所が表示されます．
+
+teamsの方ではさらに誰の記事かが表示されます．
+
+
+## qiita post
+
+Qiitaにorg-modeで書いたテキストを投稿するためのコマンドです．
+
+qiita post [FILE] [private/public/teams]
+
+FILEには投稿したいorgファイルを，privateは限定共有投稿，publicは公開記事，teamsはQiitaTeamに投稿されます．
+
+例:
+
+```
+qiita post example.org private
+```
+
+と実行すると限定共有記事にexample.orgの内容が投稿されます．
+
+
+## qiita template
+
+qiita\_orgで投稿するためのヘッダーがついたorgファイルを取得するコマンドです．
+
+カレントディレクトリにtemplate.orgを作成します．すでにtemplate.orgがある場合は作成されません．
 
 
 # future features
