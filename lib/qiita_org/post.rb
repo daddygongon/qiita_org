@@ -19,19 +19,19 @@ class QiitaPost
   public
   def get_title_tags()
     @conts = File.read(@src)
-    @title = @conts.match(/\#\+(TITLE|title|Title): (.+)/)[2] || "テスト"
-    m = []
+    m = @conts.match(/\#\+(TITLE|title|Title): (.+)/)
+    @title = m ?  m[2] : "テスト"
     @tags = if m = @conts.match(/\#\+(TAG|tag|Tag|tags|TAGS|Tags): (.+)/)
-        if m[2].count(",") >= 5
-          puts "The maximum number of tag is five. Please delete some tags.".red
-          exit
-        end
-        m[2].split(",").inject([]) do |l, c|
-          l << { name: c.strip } #, versions: []}
-        end
-      else
-        [{ name: "hoge" }] #, versions: [] }]
-      end
+              if m[2].count(",") >= 5
+                puts "The maximum number of tag is five. Please delete some tags.".red
+                exit
+              end
+              m[2].split(",").inject([]) do |l, c|
+                 l << { name: c.strip } #, versions: []}
+              end
+            else
+              [{ name: "hoge" }] #, versions: [] }]
+            end
     p @tags
   end
 
