@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 require "thor"
 require "colorize"
+require "io/console"
 require "qiita_org/version"
 require "qiita_org/post"
 require "qiita_org/config"
@@ -8,7 +9,8 @@ require "qiita_org/get"
 require "qiita_org/list"
 require "qiita_org/get_template"
 require "qiita_org/check_pc_os"
-require "qiita_org/version"
+require "qiita_org/get_file_path"
+require "qiita_org/show_file_and_url"
 #require "qiita_org/qiita_org_thor"
 
 module QiitaOrg
@@ -44,6 +46,19 @@ module QiitaOrg
         puts $!
       else
         qiita.run
+      end
+
+      getpath = GetFilePath.new(file)
+      paths = getpath.get_file_path()
+      unless paths.empty?
+        showfile = ShowFile.new(paths, file, mode)
+        showfile.open_file_dir()
+        puts "Do you show file URL? (y/n)".green
+        ans = STDIN.getch
+
+        if ans == "y"
+          showfile.show_file_url()
+        end
       end
     end
 
