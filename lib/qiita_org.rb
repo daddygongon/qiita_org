@@ -48,6 +48,7 @@ module QiitaOrg
         qiita.run
       end
 
+=begin
       getpath = GetFilePath.new(file)
       paths = getpath.get_file_path()
       unless paths.empty?
@@ -60,6 +61,7 @@ module QiitaOrg
           showfile.show_file_url()
         end
       end
+=end
     end
 
     desc "config [global/local] [option] [input]", "set config"
