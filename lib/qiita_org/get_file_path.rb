@@ -7,7 +7,7 @@ class GetFilePath
     lines = File.readlines(@src.gsub(".org", ".md"))
     files = []
     lines.each do |line|
-      if path2 = line.match(/\!\[img\]\(((.+))"(.+)"\)/)
+      if path2 = line.match(/\!\[img\]\(((.+))/)# "(.+)"\)/)
         files << path2[2]
       end
     end
