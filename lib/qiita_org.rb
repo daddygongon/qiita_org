@@ -82,12 +82,11 @@ module QiitaOrg
       p mode = argv[1] || "private"
 
       conts = File.read(file)
-      id = conts.match(/\#\+qiita_#{@option}: (.+)/)[1]
+      id = conts.match(/\#\+qiita_#{mode}: (.+)/)[1]
 
       getpath = GetFilePath.new(file)
       paths = getpath.get_file_path()
       unless paths.empty?
-        system "open https://qiita.com/api/v2/items/#{id}"
         showfile = ShowFile.new(paths, file, mode)
         showfile.open_file_dir()
 
