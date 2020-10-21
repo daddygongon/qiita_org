@@ -48,20 +48,56 @@ module QiitaOrg
         qiita.run
       end
 
-
+=begin
       getpath = GetFilePath.new(file)
       paths = getpath.get_file_path()
       unless paths.empty?
         showfile = ShowFile.new(paths, file, mode)
         showfile.open_file_dir()
+
         puts "Do you show file URL? (y/n)".green
         ans = STDIN.getch
 
         if ans == "y"
           showfile.show_file_url()
         end
-      end
 
+        puts "Input file URL's on #{file}? (y/n)".green
+        ans = STDIN.getch
+
+        if ans == "y"
+          showfile.input_url_to_org()
+        end
+      end
+=end
+    end
+
+    desc "upload [FILE] [teams/public/private]", "upload about image to qiita"
+
+    def upload(*argv)
+      checkos = CheckPcOs.new
+      os = checkos.return_os()
+
+      p file = argv[0] || "README.org"
+      p mode = argv[1] || "private"
+
+      conts = File.read(file)
+      id = conts.match(/\#\+qiita_#{@option}: (.+)/)[1]
+
+      getpath = GetFilePath.new(file)
+      paths = getpath.get_file_path()
+      unless paths.empty?
+        system "open https://qiita.com/api/v2/items/#{id}"
+        showfile = ShowFile.new(paths, file, mode)
+        showfile.open_file_dir()
+
+        puts "Input file URL's on #{file}? (y/n)".green
+        ans = STDIN.getch
+
+        if ans == "y"
+          showfile.input_url_to_org()
+        end
+      end
     end
 
     desc "config [global/local] [option] [input]", "set config"

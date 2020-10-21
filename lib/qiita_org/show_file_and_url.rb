@@ -33,4 +33,23 @@ class ShowFile
       puts url
     end
   end
+
+  def input_url_to_org()
+    lines = File.readlines(@src)
+    conts = File.read(@src)
+    id = conts.match(/\#\+qiita_#{@mode}: (.+)/)[1]
+
+    @paths.each do |path|
+      file_name = File.basename(path).strip
+      geturl = GetFileUrl.new(id, file_name, @mode)
+      url = geturl.get_file_url()
+      lines.each_with_index do |line, i|
+        if line.match(/\[\[file:#{path}\]\]/)
+          lines[i] = "[[file:#{path}][#{url}]]\n"
+        end
+      end
+    end
+    #p lines
+    File.write(@src, lines.join)
+  end
 end
