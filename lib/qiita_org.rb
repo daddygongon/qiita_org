@@ -47,29 +47,6 @@ module QiitaOrg
       else
         qiita.run
       end
-
-=begin
-      getpath = GetFilePath.new(file)
-      paths = getpath.get_file_path()
-      unless paths.empty?
-        showfile = ShowFile.new(paths, file, mode)
-        showfile.open_file_dir()
-
-        puts "Do you show file URL? (y/n)".green
-        ans = STDIN.getch
-
-        if ans == "y"
-          showfile.show_file_url()
-        end
-
-        puts "Input file URL's on #{file}? (y/n)".green
-        ans = STDIN.getch
-
-        if ans == "y"
-          showfile.input_url_to_org()
-        end
-      end
-=end
     end
 
     desc "upload [FILE] [teams/public/private]", "upload about image to qiita"
@@ -81,14 +58,12 @@ module QiitaOrg
       p file = argv[0] || "README.org"
       p mode = argv[1] || "private"
 
-      conts = File.read(file)
-      id = conts.match(/\#\+qiita_#{mode}: (.+)/)[1]
-
       getpath = GetFilePath.new(file)
       paths = getpath.get_file_path()
       unless paths.empty?
-        showfile = ShowFile.new(paths, file, mode)
+        showfile = ShowFile.new(paths, file, mode, os)
         showfile.open_file_dir()
+        showfile.open_qiita()
 
         puts "Input file URL's on #{file}? (y/n)".green
         ans = STDIN.getch

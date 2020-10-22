@@ -16,11 +16,11 @@ fogefoge
 # +caption: example qiita template command
 # +name: fig:fig1
 #+ATTR_LATEX: :width 8cm
-[[file:figs/fig1.png][https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/a3b2ab02-f903-f5d6-d8b9-5407e8db5a2a.png]]
+[[file:~/Github/qiita_org/figs/fig1.png][https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/a3b2ab02-f903-f5d6-d8b9-5407e8db5a2a.png]]
 
 
 #+caption: example qiita template command
 #+name: fig:fig1
-[[file:figs/fig2.png]]
+[[file:../figs/fig2.png]]
 
 https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/a3b2ab02-f903-f5d6-d8b9-5407e8db5a2a.png

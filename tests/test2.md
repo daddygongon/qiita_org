@@ -2,5 +2,5 @@
 
 fogefoge
 
-[![img](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/2ec26edc-82d6-60a0-5b50-45b475723343.png)](figs/fig1.png)
+![img](figs/fig1.png)
 
