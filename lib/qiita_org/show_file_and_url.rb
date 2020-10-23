@@ -21,7 +21,14 @@ class ShowFile
   def open_file_dir()
     previous_paths = []
     previous_paths << File.join(@paths[0].split("/")[0..-2])
-    system "open #{File.join(@paths[0].split("/")[0..-2])}"
+    if @os == "mac"
+      system "open #{File.join(@paths[0].split("/")[0..-2])}"
+    elsif @os == "windows"
+      system "explorer.exe #{File.join(@paths[0].split("/")[0..-2])}"
+    else
+      system "open #{File.join(@paths[0].split("/")[0..-2])}"
+      system "xdg-open #{File.join(@paths[0].split("/")[0..-2])}"
+    end
     @paths.each do |path|
       dir_path = File.join(path.split("/")[0..-2])
       unless previous_paths.include?(dir_path)
