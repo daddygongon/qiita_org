@@ -5,6 +5,7 @@ require "json"
 require "command_line/global"
 require "colorize"
 require "qiita_org/search_conf_path.rb"
+require "qiita_org/md_converter_for_image"
 
 class QiitaPost
   def initialize(file, option, os)
@@ -155,6 +156,7 @@ class QiitaPost
     set_config()
     convert_org_to_md()
     add_source_path_in_md()
+    @lines = MdConverter.new(@lines).convert_for_image()
     select_patch_or_post()
     @qiita, @private = select_option(@option)
     qiita_post()

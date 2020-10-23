@@ -84,8 +84,8 @@ class ShowFile
       url = geturl.get_file_url()
       lines.each_with_index do |line, i|
         if line.match(/\[\[file:#{path}\]\]/)
-          lines[i] = "[[file:#{path}][#{url}]]\n"
-          #lines[i] = "[[# {url}][file:# {path}]]\n"
+          #lines[i] = "[[file:# {path}][# {url}]]\n"
+          lines[i] = "[[#{url}][file:#{path}]]\n"
         end
       end
     end

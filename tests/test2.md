@@ -2,5 +2,5 @@
 
 fogefoge
 
-![img](figs/fig1.png)
+[![img](../figs/fig1.png)](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/ebf505d2-6960-6bb9-20f0-e16dab142f4a.png)
 
