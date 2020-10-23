@@ -9,10 +9,13 @@ class GetFilePath
     files = []
     lines.each do |line|
       #if path2 = line.match(/\!\[img\]\(((.+))/)# "(.+)"\)/)
-      if path2 = line.match(/\[\[file\:(.+)\](.+)\]\]/) || line.match(/\[\[file:(.+)\]\]/)
+      #if path2 = line.match(/\[\[file\:(.+)\](.+)\]\]/) || line.match(/\[\[file:(.+)\]\]/)
+      if path2 = line.match(/\[\[(.+)\]\[file:(.+)\]\]/) || line.match(/\[\[file:(.+)\]\]/)
         if path2[2] == nil
           files << path2[1]
-          end
+        else
+          files << path2[2]
+        end
       end
     end
 

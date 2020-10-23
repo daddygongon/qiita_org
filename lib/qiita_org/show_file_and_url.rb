@@ -85,6 +85,7 @@ class ShowFile
       lines.each_with_index do |line, i|
         if line.match(/\[\[file:#{path}\]\]/)
           lines[i] = "[[file:#{path}][#{url}]]\n"
+          #lines[i] = "[[# {url}][file:# {path}]]\n"
         end
       end
     end
