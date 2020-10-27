@@ -40,11 +40,19 @@ class QiitaGet
     headers = { "Authorization" => "Bearer #{@access_token}",
       "Content-Type" => "application/json" }
 
-    response = URI.open(
-                        "#{uri}",
-                        "Authorization" => "#{headers["Authorization"]}",
-                        )
-    @items = JSON.parse(response.read)
+    begin
+      response = URI.open(
+                          "#{uri}",
+                          "Authorization" => "#{headers["Authorization"]}",
+                          )
+      #raise "NOT FOUND: # {@get_id} report".red
+    rescue => e
+      puts "#{$!}".red
+      exit
+    else
+      p response
+      @items = JSON.parse(response.read)
+    end
   end
 
   # select report
