@@ -121,7 +121,7 @@ EOS
   # see massage and delete id.md
   def puts_massage_and_delete_md()
     puts "created #{@id}.org".green
-    puts "URL: #{@items["url"]}".green
+    puts "URL: #{@items["url"]}"
     system "rm -f #{@id}.md"
   end
 
