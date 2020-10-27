@@ -84,7 +84,7 @@ module QiitaOrg
       config.run
     end
 
-    desc "get [qiita/teams] [記事のID]", "get qiita report"
+    desc "get [qiita/teams] [ITEM_ID]", "get qiita report"
 
     def get(*argv)
       p mode = argv[0] || "qiita"
