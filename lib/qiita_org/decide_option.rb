@@ -8,7 +8,7 @@ class DecideOption
 
     lines.each do |line|
       if line.match(/\#\+qiita_(.+): (.+)/)
-        p option = line.match(/\#\+qiita_(.+): (.+)/)[1]
+        option = line.match(/\#\+qiita_(.+): (.+)/)[1]
         return option
       end
     end
