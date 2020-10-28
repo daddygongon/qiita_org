@@ -11,6 +11,7 @@ require "qiita_org/get_template"
 require "qiita_org/check_pc_os"
 require "qiita_org/get_file_path"
 require "qiita_org/show_file_and_url"
+require "qiita_org/decide_option"
 #require "qiita_org/qiita_org_thor"
 
 module QiitaOrg
@@ -38,7 +39,7 @@ module QiitaOrg
 
       p ["in qiita_org.rb", argv]
       p file = argv[0] || "README.org"
-      p mode = argv[1] || "private"
+      p mode = argv[1] || DecideOption.new(file).decide_option()
       qiita = QiitaPost.new(file, mode, os)
       begin
         qiita.select_option(mode)
