@@ -50,7 +50,6 @@ class QiitaGet
       puts "#{$!}".red
       exit
     else
-      p response
       @items = JSON.parse(response.read)
     end
   end
