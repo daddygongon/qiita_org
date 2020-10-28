@@ -165,6 +165,8 @@ class QiitaPost
     open_qiita()
 
     add_qiita_id_on_org()
+
+    system "rm #{@src.gsub(".org", ".md")}"
   end
 end
 
