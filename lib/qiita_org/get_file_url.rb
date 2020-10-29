@@ -3,23 +3,14 @@ require "json"
 require "open-uri"
 require "io/console"
 require "colorize"
-require "qiita_org/search_conf_path.rb"
+require "qiita_org/set_config.rb"
 
 class GetFileUrl
   def initialize(id, file, mode)
     @id = id
     @file = file
     @mode = (mode == "qiita" || mode == "open")? "public" : mode
-    search = SearchConfPath.new(Dir.pwd, Dir.home)
-    @conf_dir = search.search_conf_path()
-    set_config()
-  end
-
-  def set_config()
-    conf_path = File.join(@conf_dir, ".qiita.conf")
-    @conf = JSON.load(File.read(conf_path))
-    @access_token = @conf["access_token"]
-    @teams_url = @conf["teams_url"]
+    @access_token, @teams_url, @ox_qmd_load_path = SetConfig.new().set_config()
   end
 
   def get_file_url()

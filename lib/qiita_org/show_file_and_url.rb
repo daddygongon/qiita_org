@@ -1,5 +1,6 @@
 require "colorize"
 require "qiita_org/get_file_url.rb"
+require "qiita_org/set_config.rb"
 
 class ShowFile
   def initialize(paths, src, mode, os)
@@ -7,15 +8,6 @@ class ShowFile
     @src = src
     @mode = (mode == "qiita" || mode == "open")? "public" : mode
     @os = os
-    search = SearchConfPath.new(Dir.pwd, Dir.home)
-    @conf_dir = search.search_conf_path()
-  end
-
-  def set_config()
-    conf_path = File.join(@conf_dir, ".qiita.conf")
-    @conf = JSON.load(File.read(conf_path))
-    @access_token = @conf["access_token"]
-    @teams_url = @conf["teams_url"]
   end
 
   def open_file_dir()
@@ -50,7 +42,7 @@ class ShowFile
     conts = File.read(@src)
     id = conts.match(/\#\+qiita_#{@mode}: (.+)/)[1]
 
-    set_config()
+    @access_token, @teams_url, @ox_qmd_load_path = SetConfig.new().set_config()
 
     qiita = (@mode == "teams")? @teams_url : "https://qiita.com/"
     path = "api/v2/items/#{id}"

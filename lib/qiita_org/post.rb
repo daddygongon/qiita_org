@@ -4,17 +4,14 @@ require "net/https"
 require "json"
 require "command_line/global"
 require "colorize"
-require "qiita_org/search_conf_path.rb"
 require "qiita_org/md_converter_for_image"
+require "qiita_org/set_config.rb"
 
 class QiitaPost
   def initialize(file, option, os)
     @src = file
     @option = (option == "qiita" || option == "open")? "public" : option
     @os = os
-    search = SearchConfPath.new(Dir.pwd, Dir.home)
-    @conf_dir = search.search_conf_path()
-    p @conf_dir
   end
 
   public
@@ -34,15 +31,6 @@ class QiitaPost
               [{ name: "hoge" }] #, versions: [] }]
             end
     p @tags
-  end
-
-  def set_config()
-    conf_path = File.join(@conf_dir, ".qiita.conf")
-    @conf = JSON.load(File.read(conf_path))
-    @access_token = @conf["access_token"]
-    @teams_url = @conf["teams_url"]
-    lib = File.expand_path("../../../lib", __FILE__)
-    @ox_qmd_load_path = File.join(lib, "qiita_org", "ox-qmd", "ox-qmd") # @conf["ox_qmd_load_path"]
   end
 
   # src.org -> src.md
@@ -153,7 +141,7 @@ class QiitaPost
 
   def run()
     get_title_tags()
-    set_config()
+    @access_token, @teams_url, @ox_qmd_load_path = SetConfig.new().set_config()
     convert_org_to_md()
     add_source_path_in_md()
     @lines = MdConverter.new(@lines).convert_for_image()
