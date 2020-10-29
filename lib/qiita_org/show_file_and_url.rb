@@ -1,6 +1,7 @@
 require "colorize"
 require "qiita_org/get_file_url.rb"
 require "qiita_org/set_config.rb"
+require "qiita_org/access_qiita.rb"
 
 class ShowFile
   def initialize(paths, src, mode, os)
@@ -43,11 +44,14 @@ class ShowFile
     id = conts.match(/\#\+qiita_#{@mode}: (.+)/)[1]
 
     @access_token, @teams_url, @ox_qmd_load_path = SetConfig.new().set_config()
+    if @mode == "teams"
+      ErrorMassage.new().teams_url_error(@teams_url)
+    end
 
     qiita = (@mode == "teams")? @teams_url : "https://qiita.com/"
     path = "api/v2/items/#{id}"
 
-    items = access_qiita(@access_token, qiita, path)
+    items = AccessQiita.new(@access_token, qiita, path).access_qiita()
 
     if @os == "mac"
       system "open #{items["url"]}"
@@ -92,6 +96,7 @@ class ShowFile
     File.write(@src, lines.join)
   end
 
+=begin
   def access_qiita(access_token, qiita, path)
     uri = URI.parse(qiita + path)
 
@@ -99,10 +104,11 @@ class ShowFile
                 "Content-Type" => "application/json" }
 
     response = URI.open(
-      "#{uri}",
-      "Authorization" => "#{headers["Authorization"]}",
+      "# {uri}",
+      "Authorization" => "# {headers["Authorization"]}",
     )
     items = JSON.parse(response.read)
     return items
   end
+=end
 end

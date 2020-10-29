@@ -6,6 +6,7 @@ require "command_line/global"
 require "colorize"
 require "qiita_org/md_converter_for_image"
 require "qiita_org/set_config.rb"
+require "qiita_org/error_massage"
 
 class QiitaPost
   def initialize(file, option, os)
@@ -142,6 +143,11 @@ class QiitaPost
   def run()
     get_title_tags()
     @access_token, @teams_url, @ox_qmd_load_path = SetConfig.new().set_config()
+
+    if @option == "teams"
+      ErrorMassage.new().teams_url_error(@teams_url)
+    end
+
     convert_org_to_md()
     add_source_path_in_md()
     @lines = MdConverter.new(@lines).convert_for_image()

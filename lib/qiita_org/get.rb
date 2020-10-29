@@ -4,6 +4,8 @@ require "open-uri"
 require "io/console"
 require "colorize"
 require "qiita_org/set_config.rb"
+require "qiita_org/error_massage.rb"
+require "qiita_org/access_qiita.rb"
 
 class QiitaGet
   def initialize(mode, id)
@@ -24,6 +26,7 @@ class QiitaGet
   end
 
   # access qiita
+=begin
   def access_qiita()
     uri = URI.parse(@qiita + @path)
 
@@ -43,6 +46,7 @@ class QiitaGet
       @items = JSON.parse(response.read)
     end
   end
+=end
 
   # select report
   def select_report()
@@ -131,7 +135,8 @@ EOS
     end
     @path = "api/v2/items/#{@get_id}"
 
-    access_qiita()
+    @items = AccessQiita.new(@access_token, @qiita, @path).access_qiita()
+    #access_qiita()
 
     @title = @items["title"]
     @id = @items["id"]
@@ -150,9 +155,13 @@ EOS
 
   def run()
     @access_token, @teams_url, @ox_qmd_load_path = SetConfig.new().set_config()
+    if @mode == "teams"
+      ErrorMassage.new().teams_url_error(@teams_url)
+    end
+
     if @get_id == nil
       select_path()
-      access_qiita()
+      @items = AccessQiita.new(@access_token, @qiita, @path).access_qiita()
       select_report()
     else
       get_id_report()

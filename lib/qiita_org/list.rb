@@ -3,13 +3,19 @@ require "json"
 require "open-uri"
 require "colorize"
 require "qiita_org/set_config.rb"
+require "qiita_org/error_massage.rb"
+require "qiita_org/access_qiita.rb"
 
 class QiitaList
   def initialize(mode)
     @mode = mode
     @access_token, @teams_url, @ox_qmd_load_path = SetConfig.new().set_config()
+    if @mode == "teams"
+      ErrorMassage.new().teams_url_error(@teams_url)
+    end
+
     select_path()
-    access_qiita()
+    @items = AccessQiita.new(@access_token, @qiita, @path).access_qiita()
     view_list()
   end
 
@@ -26,6 +32,7 @@ class QiitaList
   end
 
   # access qiita
+=begin
   def access_qiita()
     uri = URI.parse(@qiita + @path)
 
@@ -38,6 +45,7 @@ class QiitaList
                         )
     @items = JSON.parse(response.read)
   end
+=end
 
   def view_list()
     @items.each do |item|

@@ -12,4 +12,11 @@ class ErrorMassage
     end
  #   return true
   end
+
+  def teams_url_error(teams_url)
+    if teams_url == ""
+      puts "Please setting teams_url".red
+      exit
+    end
+  end
 end
