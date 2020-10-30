@@ -8,9 +8,7 @@ class ErrorMassage
     if access_token == ""
       puts "Please setting ACCESS_TOKEN".red
       exit
-#      return false
     end
- #   return true
   end
 
   def teams_url_error(teams_url)

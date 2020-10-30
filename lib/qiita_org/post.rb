@@ -133,12 +133,12 @@ class QiitaPost
 =begin
   def open_qiita()
     if @os == "mac"
-      system "open #{@res_body["url"]}"
+      system "open # {@res_body["url"]}"
     elsif @os == "windows"
-      system "explorer.exe #{@res_body["url"]}"
+      system "explorer.exe # {@res_body["url"]}"
     else
-      system "open #{@res_body["url"]}"
-      system "xdg-open #{@res_body["url"]}"
+      system "open # {@res_body["url"]}"
+      system "xdg-open # {@res_body["url"]}"
     end
   end
 =end

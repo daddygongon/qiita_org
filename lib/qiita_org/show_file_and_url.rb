@@ -20,29 +20,29 @@ class ShowFile
 
 =begin
     if @os == "mac"
-      system "open #{File.join(@paths[0].split("/")[0..-2])}"
+      system "open # {File.join(@paths[0].split("/")[0..-2])}"
     elsif @os == "windows"
-      system "explorer.exe #{File.join(@paths[0].split("/")[0..-2])}"
+      system "explorer.exe # {File.join(@paths[0].split("/")[0..-2])}"
     else
-      system "open #{File.join(@paths[0].split("/")[0..-2])}"
-      system "xdg-open #{File.join(@paths[0].split("/")[0..-2])}"
+      system "open # {File.join(@paths[0].split("/")[0..-2])}"
+      system "xdg-open # {File.join(@paths[0].split("/")[0..-2])}"
     end
 =end
     @paths.each do |path|
       dir_path = File.join(path.split("/")[0..-2])
       unless previous_paths.include?(dir_path)
         previous_paths << dir_path
-        #system "open #{dir_path}"
+        #system "open # {dir_path}"
         fileopen.file_open(dir_path)
 
 =begin
         if @os == "mac"
-          system "open #{dir_path}"
+          system "open # {dir_path}"
         elsif @os == "windows"
-          system "explorer.exe #{dir_path}"
+          system "explorer.exe # {dir_path}"
         else
-          system "open #{dir_path}"
-          system "xdg-open #{dir_path}"
+          system "open # {dir_path}"
+          system "xdg-open # {dir_path}"
         end
 =end
       end
@@ -66,12 +66,12 @@ class ShowFile
     fileopen.file_open(items["url"])
 =begin
     if @os == "mac"
-      system "open #{items["url"]}"
+      system "open # {items["url"]}"
     elsif @os == "windows"
-      system "explorer.exe #{items["url"]}"
+      system "explorer.exe # {items["url"]}"
     else
-      system "open #{items["url"]}"
-      system "xdg-open #{items["url"]}"
+      system "open # {items["url"]}"
+      system "xdg-open # {items["url"]}"
     end
 =end
   end

@@ -38,8 +38,8 @@ class GetFileUrl
                 "Content-Type" => "application/json" }
 
     response = URI.open(
-      "#{uri}",
-      "Authorization" => "#{headers["Authorization"]}",
+      "# {uri}",
+      "Authorization" => "# {headers["Authorization"]}",
     )
     items = JSON.parse(response.read)
     return items

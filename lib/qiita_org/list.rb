@@ -36,12 +36,12 @@ class QiitaList
   def access_qiita()
     uri = URI.parse(@qiita + @path)
 
-    headers = { "Authorization" => "Bearer #{@access_token}",
+    headers = { "Authorization" => "Bearer # {@access_token}",
       "Content-Type" => "application/json" }
 
     response = URI.open(
-                        "#{uri}",
-                        "Authorization" => "#{headers["Authorization"]}",
+                        "# {uri}",
+                        "Authorization" => "# {headers["Authorization"]}",
                         )
     @items = JSON.parse(response.read)
   end
