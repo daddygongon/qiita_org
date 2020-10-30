@@ -7,6 +7,7 @@ require "colorize"
 require "qiita_org/md_converter_for_image"
 require "qiita_org/set_config.rb"
 require "qiita_org/error_massage"
+require "qiita_org/file_open.rb"
 
 class QiitaPost
   def initialize(file, option, os)
@@ -129,6 +130,7 @@ class QiitaPost
   end
 
   # open qiita
+=begin
   def open_qiita()
     if @os == "mac"
       system "open #{@res_body["url"]}"
@@ -139,6 +141,7 @@ class QiitaPost
       system "xdg-open #{@res_body["url"]}"
     end
   end
+=end
 
   def run()
     get_title_tags()
@@ -156,7 +159,8 @@ class QiitaPost
     qiita_post()
     get_and_print_qiita_return()
 
-    open_qiita()
+    #open_qiita()
+    FileOpen.new(@os).file_open(@res_body["url"])
 
     add_qiita_id_on_org()
 

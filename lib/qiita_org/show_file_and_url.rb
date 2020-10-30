@@ -2,6 +2,7 @@ require "colorize"
 require "qiita_org/get_file_url.rb"
 require "qiita_org/set_config.rb"
 require "qiita_org/access_qiita.rb"
+require "qiita_org/file_open.rb"
 
 class ShowFile
   def initialize(paths, src, mode, os)
@@ -9,11 +10,15 @@ class ShowFile
     @src = src
     @mode = (mode == "qiita" || mode == "open")? "public" : mode
     @os = os
+    fileopen = FileOpen.new(@os)
   end
 
   def open_file_dir()
     previous_paths = []
     previous_paths << File.join(@paths[0].split("/")[0..-2])
+    fileopen.file_open(File.join(@paths[0].split("/")[0..-2])
+
+=begin
     if @os == "mac"
       system "open #{File.join(@paths[0].split("/")[0..-2])}"
     elsif @os == "windows"
@@ -22,11 +27,15 @@ class ShowFile
       system "open #{File.join(@paths[0].split("/")[0..-2])}"
       system "xdg-open #{File.join(@paths[0].split("/")[0..-2])}"
     end
+=end
     @paths.each do |path|
       dir_path = File.join(path.split("/")[0..-2])
       unless previous_paths.include?(dir_path)
         previous_paths << dir_path
         #system "open #{dir_path}"
+        fileopen.file_open(dir_path)
+
+=begin
         if @os == "mac"
           system "open #{dir_path}"
         elsif @os == "windows"
@@ -35,6 +44,7 @@ class ShowFile
           system "open #{dir_path}"
           system "xdg-open #{dir_path}"
         end
+=end
       end
     end
   end
@@ -53,6 +63,8 @@ class ShowFile
 
     items = AccessQiita.new(@access_token, qiita, path).access_qiita()
 
+    fileopen.file_open(items["url"])
+=begin
     if @os == "mac"
       system "open #{items["url"]}"
     elsif @os == "windows"
@@ -61,6 +73,7 @@ class ShowFile
       system "open #{items["url"]}"
       system "xdg-open #{items["url"]}"
     end
+=end
   end
 
   def show_file_url()
