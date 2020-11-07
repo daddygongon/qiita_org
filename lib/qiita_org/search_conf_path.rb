@@ -2,7 +2,7 @@ class SearchConfPath
   def initialize(dir, home)
     @dir = dir
     @home = home
-    search_conf_path()
+    #search_conf_path()
   end
 
   def search_conf_path()

@@ -1,25 +1,25 @@
 class MdConverter
-  def initialize(lines)
-    @lines = lines
+  def initialize()
+    # @lines = lines
   end
 
-  def convert_for_image()
-    @lines.each_with_index do |line, i|
+  def convert_for_image(lines)
+    lines.each_with_index do |line, i|
       m = []
       if m = line.match(/\[\!\[img\]\((.+) "(.+)"\)\]\((.+)\)/)
         path = File.basename(m[1])
         url = m[3]
-        @lines[i] = "![#{path}](#{url})\n"
+        lines[i] = "![#{path}](#{url})\n"
       elsif m = line.match(/\[\!\[img\]\((.+)\)\]\((.+)\)/)
         path = File.basename(m[1])
         url = m[2]
-        @lines[i] = "![#{path}](#{url})\n"
+        lines[i] = "![#{path}](#{url})\n"
       else
         next
       end
     end
 
-    return @lines
+    return lines
   end
 end
 

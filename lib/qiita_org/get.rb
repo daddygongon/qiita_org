@@ -3,27 +3,32 @@ require "json"
 require "open-uri"
 require "io/console"
 require "colorize"
+require "qiita_org/select_path.rb"
 require "qiita_org/set_config.rb"
-require "qiita_org/error_massage.rb"
+require "qiita_org/error_message.rb"
 require "qiita_org/access_qiita.rb"
 
 class QiitaGet
   def initialize(mode, id)
     @mode = mode
     @get_id = id
+    @selectpath = SelectPath.new()
   end
 
   # select path
-  def select_path()
-    case @mode
+=begin
+  def select_path(mode)
+    case mode
     when "teams"
-      @qiita = @teams_url
-      @path = "api/v2/items?page=1&per_page=100"
+      qiita = @teams_url
+      path = "api/v2/items?page=1&per_page=100"
     else
-      @qiita = "https://qiita.com/"
-      @path = "api/v2/authenticated_user/items?page=1&per_page=100"
+      qiita = "https://qiita.com/"
+      path = "api/v2/authenticated_user/items?page=1&per_page=100"
     end
+    return qiita, path
   end
+=end
 
   # access qiita
 =begin
@@ -156,11 +161,11 @@ EOS
   def run()
     @access_token, @teams_url, @ox_qmd_load_path = SetConfig.new().set_config()
     if @mode == "teams"
-      ErrorMassage.new().teams_url_error(@teams_url)
+      ErrorMessage.new().teams_url_error(@teams_url)
     end
 
     if @get_id == nil
-      select_path()
+      @qiita, @path = @selectpath.select_path(@mode)
       @items = AccessQiita.new(@access_token, @qiita, @path).access_qiita()
       select_report()
     else

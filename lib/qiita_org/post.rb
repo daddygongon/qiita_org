@@ -6,7 +6,7 @@ require "command_line/global"
 require "colorize"
 require "qiita_org/md_converter_for_image"
 require "qiita_org/set_config.rb"
-require "qiita_org/error_massage"
+require "qiita_org/error_message"
 require "qiita_org/file_open.rb"
 
 class QiitaPost
@@ -17,15 +17,15 @@ class QiitaPost
   end
 
   public
-  def get_title_tags()
-    @conts = File.read(@src)
-    m = @conts.match(/\#\+(TITLE|title|Title): (.+)/)
+  def get_title_tags(conts)
+    m = conts.match(/\#\+(TITLE|title|Title): (.+)/)
     @title = m ?  m[2] : "テスト"
-    @tags = if m = @conts.match(/\#\+(TAG|tag|Tag|tags|TAGS|Tags): (.+)/)
-              if m[2].count(",") >= 5
-                puts "The maximum number of tag is five. Please delete some tags.".red
-                exit
-              end
+    @tags = if m = conts.match(/\#\+(TAG|tag|Tag|tags|TAGS|Tags): (.+)/)
+              #if m[2].count(",") >= 5
+               # puts "The maximum number of tag is five. Please delete some tags.".red
+                #exit
+              #end
+              ErrorMessage.new().many_tags_error(m[2])
               m[2].split(",").inject([]) do |l, c|
                  l << { name: c.strip } #, versions: []}
               end
@@ -33,13 +33,15 @@ class QiitaPost
               [{ name: "hoge" }] #, versions: [] }]
             end
     p @tags
+    return @title, @tags
   end
 
   # src.org -> src.md
   def convert_org_to_md()
     command = "emacs #{@src} --batch -l #{@ox_qmd_load_path} -f org-qmd-export-to-markdown --kill"
     res = command_line command
-    p res
+    #p res
+    ErrorMessage.new().md_file_exists?(@src, res)
   end
 
   # add source path in md
@@ -50,15 +52,16 @@ class QiitaPost
   end
 
   # patch or post selector by qiita_id
-  def select_patch_or_post()
+  def select_patch_or_post(conts, option)
     m = []
-    @patch = false
-    if m = @conts.match(/\#\+qiita_#{@option}: (.+)/)
-      @qiita_id = m[1]
-      @patch = true
+    patch = false
+    if m = conts.match(/\#\+qiita_#{option}: (.+)/)
+      qiita_id = m[1]
+      patch = true
     else
-      @qiita_id = ""
+      qiita_id = ""
     end
+    return qiita_id, patch
   end
 
   def select_option(option)
@@ -100,11 +103,16 @@ class QiitaPost
 
     headers = { "Authorization" => "Bearer #{@access_token}",
                 "Content-Type" => "application/json" }
+
     if @patch
-      @res = http_req.patch(uri.path, params.to_json, headers)
+      res = http_req.patch(uri.path, params.to_json, headers)
     else
-      @res = http_req.post(uri.path, params.to_json, headers)
+      res = http_req.post(uri.path, params.to_json, headers)
     end
+
+    ErrorMessage.new().qiita_post_error(res)
+
+    return res
   end
 
   # qiita return
@@ -144,19 +152,20 @@ class QiitaPost
 =end
 
   def run()
-    get_title_tags()
+    @conts = File.read(@src)
+    @title, @tags = get_title_tags(@conts)
     @access_token, @teams_url, @ox_qmd_load_path = SetConfig.new().set_config()
 
     if @option == "teams"
-      ErrorMassage.new().teams_url_error(@teams_url)
+      ErrorMessage.new().teams_url_error(@teams_url)
     end
 
     convert_org_to_md()
     add_source_path_in_md()
-    @lines = MdConverter.new(@lines).convert_for_image()
-    select_patch_or_post()
+    @lines = MdConverter.new().convert_for_image(@lines)
+    @qiita_id, @patch = select_patch_or_post(@conts, @option)
     @qiita, @private = select_option(@option)
-    qiita_post()
+    @res = qiita_post()
     get_and_print_qiita_return()
 
     #open_qiita()

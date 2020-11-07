@@ -2,16 +2,14 @@ require "fileutils"
 require "colorize"
 require "kconv"
 require "qiita_org/search_conf_path"
+require "qiita_org/error_message.rb"
 
 class QiitaGetTemplate
   def initialize(os)
     @os = os
-    cp_template()
     search = SearchConfPath.new(Dir.pwd, Dir.home)
     @conf_dir = search.search_conf_path()
-    set_name_and_email()
     # check_write_header()
-    check_write_contents()
   end
 
   def get_macos_version()
@@ -142,5 +140,12 @@ class QiitaGetTemplate
     conts[3] = "#+AUTHOR: #{name}\n"
     conts[4] = "#+EMAIL:     (concat \"#{email}\")\n"
     File.write("template.org", conts.join)
+  end
+
+  def run()
+    ErrorMessage.new().config_set_error(@conf_dir)
+    cp_template()
+    set_name_and_email()
+    check_write_contents()
   end
 end

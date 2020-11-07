@@ -1,5 +1,5 @@
 require "qiita_org/search_conf_path.rb"
-require "qiita_org/error_massage.rb"
+require "qiita_org/error_message.rb"
 
 class SetConfig
   def initialize()
@@ -20,7 +20,7 @@ class SetConfig
     teams_url = conf["teams_url"]
     ox_qmd_load_path = File.join(@lib, "qiita_org", "ox-qmd", "ox-qmd")
 
-    ErrorMassage.new().access_token_error(access_token) #== false
+    ErrorMessage.new().access_token_error(access_token) #== false
 #      puts "Please setting ACCESS_TOKEN".red
 #      exit
 

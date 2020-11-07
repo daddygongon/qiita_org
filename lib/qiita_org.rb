@@ -9,6 +9,7 @@ require "qiita_org/get"
 require "qiita_org/list"
 require "qiita_org/get_template"
 require "qiita_org/check_pc_os"
+require "qiita_org/upload"
 require "qiita_org/get_file_path"
 require "qiita_org/show_file_and_url"
 require "qiita_org/decide_option"
@@ -57,8 +58,10 @@ module QiitaOrg
       os = checkos.return_os()
 
       p file = argv[0] || "README.org"
-      p mode = argv[1] || "private"
+      p mode = argv[1] || DecideOption.new(file).decide_option()
 
+      UpLoad.new(file, mode, os).upload()
+=begin
       getpath = GetFilePath.new(file)
       paths = getpath.get_file_path()
       unless paths.empty?
@@ -73,6 +76,7 @@ module QiitaOrg
           showfile.input_url_to_org()
         end
       end
+=end
     end
 
     desc "config [global/local] [option] [input]", "set config"
@@ -100,7 +104,7 @@ module QiitaOrg
       checkos = CheckPcOs.new
       os = checkos.return_os()
 
-      template = QiitaGetTemplate.new(os)
+      template = QiitaGetTemplate.new(os).run()
     end
 
     desc "all", "post all org file in the directory"

@@ -1,4 +1,5 @@
 #+qiita_private: 5f8c73e8007e52ef3f40
+# +qiita_private: 4decbf7a81ef2327643f
 #+OPTIONS: ^:{}
 #+STARTUP: indent nolineimages
 #+TITLE: test
@@ -7,12 +8,13 @@
 #+LANGUAGE:  jp
 # +OPTIONS:   H:4 toc:t num:2
 #+OPTIONS:   toc:nil
-#+TAG: test
+#+TAG: test1, test2, test3, test4, test5
 # +SETUPFILE: ~/.emacs.d/org-mode/theme-readtheorg.setup
 
 ![Mac OS X-10.13.3](https://img.shields.io/badge/MacOSX-10.13.3-brightgreen) ![ruby-2.7.0p0](https://img.shields.io/badge/ruby-2.7.0p0-brightgreen) 
 
-fogefoge
+| fogefoge | fogefoge |
+| foge     | foge     |
 # +caption: example qiita template command
 # +name: fig:fig1
 #+ATTR_LATEX: :width 8cm
@@ -24,3 +26,5 @@ fogefoge
 [[file:../figs/fig2.png]]
 
 https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/a3b2ab02-f903-f5d6-d8b9-5407e8db5a2a.png
+
+

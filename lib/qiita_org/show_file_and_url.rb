@@ -8,43 +8,40 @@ class ShowFile
   def initialize(paths, src, mode, os)
     @paths = paths
     @src = src
-    @mode = (mode == "qiita" || mode == "open")? "public" : mode
+    @mode = (mode == "qiita" || mode == "open") ? "public" : mode
     @os = os
-    fileopen = FileOpen.new(@os)
+    @fileopen = FileOpen.new(@os)
   end
 
   def open_file_dir()
     previous_paths = []
     previous_paths << File.join(@paths[0].split("/")[0..-2])
-    fileopen.file_open(File.join(@paths[0].split("/")[0..-2])
+    @fileopen.file_open(File.join(@paths[0].split("/")[0..-2]))
 
-=begin
-    if @os == "mac"
-      system "open # {File.join(@paths[0].split("/")[0..-2])}"
-    elsif @os == "windows"
-      system "explorer.exe # {File.join(@paths[0].split("/")[0..-2])}"
-    else
-      system "open # {File.join(@paths[0].split("/")[0..-2])}"
-      system "xdg-open # {File.join(@paths[0].split("/")[0..-2])}"
-    end
-=end
+    #    if @os == "mac"
+    #      system "open # {File.join(@paths[0].split("/")[0..-2])}"
+    #    elsif @os == "windows"
+    #      system "explorer.exe # {File.join(@paths[0].split("/")[0..-2])}"
+    #    else
+    #      system "open # {File.join(@paths[0].split("/")[0..-2])}"
+    #      system "xdg-open # {File.join(@paths[0].split("/")[0..-2])}"
+    #    end
+
     @paths.each do |path|
       dir_path = File.join(path.split("/")[0..-2])
       unless previous_paths.include?(dir_path)
         previous_paths << dir_path
         #system "open # {dir_path}"
-        fileopen.file_open(dir_path)
+        @fileopen.file_open(dir_path)
 
-=begin
-        if @os == "mac"
-          system "open # {dir_path}"
-        elsif @os == "windows"
-          system "explorer.exe # {dir_path}"
-        else
-          system "open # {dir_path}"
-          system "xdg-open # {dir_path}"
-        end
-=end
+        #        if @os == "mac"
+        #          system "open # {dir_path}"
+        #        elsif @os == "windows"
+        #          system "explorer.exe # {dir_path}"
+        #        else
+        #          system "open # {dir_path}"
+        #          system "xdg-open # {dir_path}"
+        #        end
       end
     end
   end
@@ -58,12 +55,12 @@ class ShowFile
       ErrorMassage.new().teams_url_error(@teams_url)
     end
 
-    qiita = (@mode == "teams")? @teams_url : "https://qiita.com/"
+    qiita = (@mode == "teams") ? @teams_url : "https://qiita.com/"
     path = "api/v2/items/#{id}"
 
     items = AccessQiita.new(@access_token, qiita, path).access_qiita()
 
-    fileopen.file_open(items["url"])
+    @fileopen.file_open(items["url"])
 =begin
     if @os == "mac"
       system "open # {items["url"]}"

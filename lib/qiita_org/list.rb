@@ -2,8 +2,9 @@ require "net/https"
 require "json"
 require "open-uri"
 require "colorize"
+require "qiita_org/select_path.rb"
 require "qiita_org/set_config.rb"
-require "qiita_org/error_massage.rb"
+require "qiita_org/error_message.rb"
 require "qiita_org/access_qiita.rb"
 
 class QiitaList
@@ -11,15 +12,16 @@ class QiitaList
     @mode = mode
     @access_token, @teams_url, @ox_qmd_load_path = SetConfig.new().set_config()
     if @mode == "teams"
-      ErrorMassage.new().teams_url_error(@teams_url)
+      ErrorMessage.new().teams_url_error(@teams_url)
     end
 
-    select_path()
+    @qiita, @path = SelectPath.new().select_path(@mode)
     @items = AccessQiita.new(@access_token, @qiita, @path).access_qiita()
     view_list()
   end
 
   # select path
+=begin
   def select_path()
     case @mode
     when "teams"
@@ -30,6 +32,7 @@ class QiitaList
       @path = "api/v2/authenticated_user/items?page=1&per_page=100"
     end
   end
+=end
 
   # access qiita
 =begin

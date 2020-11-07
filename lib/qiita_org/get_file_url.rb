@@ -4,7 +4,7 @@ require "open-uri"
 require "io/console"
 require "colorize"
 require "qiita_org/set_config.rb"
-require "qiita_org/error_massage.rb"
+require "qiita_org/error_message.rb"
 require "qiita_org/access_qiita.rb"
 
 class GetFileUrl
@@ -14,7 +14,7 @@ class GetFileUrl
     @mode = (mode == "qiita" || mode == "open")? "public" : mode
     @access_token, @teams_url, @ox_qmd_load_path = SetConfig.new().set_config()
     if @mode == "teams"
-      ErrorMassage.new().teams_url_error(@teams_url)
+      ErrorMessage.new().teams_url_error(@teams_url)
     end
   end
 
