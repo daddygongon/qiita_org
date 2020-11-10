@@ -26,25 +26,27 @@ class ErrorMessage
 
   def qiita_post_error(response)
     message = response.message
-    if message != "OK"
-      if message == "Unauthorized"
-        puts "#{message}".red
-        puts "Please check your access_token.".red
-        exit
+    if message != "Created"
+      if message != "OK"
+        if message == "Unauthorized"
+          puts "#{message}".red
+          puts "Please check your access_token.".red
+          exit
       elsif message == "Forbidden"
+          puts "#{message}".red
+          puts "You are not authorized to access this page. please check qiita_id.".red
+          exit
+        elsif message == "Not Found"
         puts "#{message}".red
-        puts "You are not authorized to access this page. please check qiita_id.".red
-        exit
-      elsif message == "Not Found"
-        puts "#{message}".red
-        exit
-      else
-        puts "#{message}".red
-        exit
+          exit
+        else
+          puts "#{message}".red
+          exit
+        end
       end
     end
   end
-
+  
   def config_set_error(conf_dir)
     conf_path = File.join(conf_dir, ".qiita.conf")
     conf = JSON.load(File.read(conf_path))
