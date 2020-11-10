@@ -107,7 +107,7 @@ module QiitaOrg
       template = QiitaGetTemplate.new(os).run()
     end
 
-    desc "all", "post all org file in the directory"
+    desc "all", "post all org files in the directory"
 
     def all(*argv)
       Dir.glob("*.org").each do |org|
