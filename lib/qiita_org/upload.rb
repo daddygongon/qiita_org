@@ -17,7 +17,7 @@ class UpLoad
       showfile.open_file_dir()
       showfile.open_qiita()
 
-      puts "Input file URL's on #{@src}? (y/n)".green
+      puts "Overwrite file URL's on #{@src}? (y/n)".green
       ans = STDIN.getch
 
       if ans == "y"
