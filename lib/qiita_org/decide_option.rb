@@ -7,8 +7,12 @@ class DecideOption
     lines = File.readlines(@src)
 
     lines.each do |line|
-      if line.match(/\#\+qiita_(.+): (.+)/)
-        option = line.match(/\#\+qiita_(.+): (.+)/)[1]
+      m = []
+      if m = line.match(/\#\+qiita_(.+): (.+)/)
+        option = m[1] #line.match(/\#\+qiita_(.+): (.+)/)[1]
+        unless option == "public" || option == "teams" || option == "private"
+          next
+        end
         return option
       end
     end

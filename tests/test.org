@@ -1,10 +1,11 @@
-#+qiita_private: 5f8c73e8007e52ef3f40
+# +qiita_private: 5f8c73e8007e52ef3f40
 # +qiita_private: 4decbf7a81ef2327643f
 #+OPTIONS: ^:{}
 #+STARTUP: indent nolineimages
 #+TITLE: test
 #+AUTHOR: Kenta Yamamoto
 #+EMAIL:     (concat "doi35077@kwansei.ac.jp")
+#+qiita_id: yamatoken
 #+LANGUAGE:  jp
 # +OPTIONS:   H:4 toc:t num:2
 #+OPTIONS:   toc:nil
