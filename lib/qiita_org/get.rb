@@ -77,7 +77,7 @@ class QiitaGet
         File.write(filename, item["body"])
         convert_md_to_org()
         write_header_on_org()
-        puts_massage_and_delete_md()
+        puts_massage_and_delete_md(item)
       end
     end
   end
@@ -125,9 +125,9 @@ EOS
   end
 
   # see massage and delete id.md
-  def puts_massage_and_delete_md()
+  def puts_massage_and_delete_md(item)
     puts "created #{@id}.org".green
-    puts "URL: #{@items["url"]}"
+    puts "URL: #{item["url"]}"
     system "rm -f #{@id}.md"
   end
 
@@ -155,7 +155,7 @@ EOS
     File.write(filename, @items["body"])
     convert_md_to_org()
     write_header_on_org()
-    puts_massage_and_delete_md()
+    puts_massage_and_delete_md(@items)
   end
 
   def run()
