@@ -66,6 +66,8 @@ module QiitaOrg
 
       if argv.size > 2
         GetMultipleFiles.new(argv, os, "upload").run()
+      elsif argv[-1].match(/(.+).org/)
+        GetMultipleFiles.new(argv, os, "upload").run()
       else
         p file = argv[0] || "README.org"
         p mode = argv[1] || DecideOption.new(file).decide_option()
