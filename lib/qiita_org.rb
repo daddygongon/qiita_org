@@ -41,6 +41,8 @@ module QiitaOrg
 
       if argv.size > 2
         GetMultipleFiles.new(argv, os, "post").run()
+      elsif argv[-1].match(/(.+).org/)
+        GetMultipleFiles.new(argv, os, "post").run()
       else
         p ["in qiita_org.rb", argv]
         p file = argv[0] || "README.org"
