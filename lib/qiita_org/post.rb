@@ -110,7 +110,7 @@ class QiitaPost
       res = http_req.post(uri.path, params.to_json, headers)
     end
 
-    ErrorMessage.new().qiita_post_error(res)
+    ErrorMessage.new().qiita_post_error(res, @src.gsub(".org", ".md"))
 
     return res
   end
