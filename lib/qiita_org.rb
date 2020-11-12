@@ -41,7 +41,7 @@ module QiitaOrg
 
       if argv.size > 2
         GetMultipleFiles.new(argv, os, "post").run()
-      elsif argv[-1].match(/(.+).org/)
+      elsif argv[-1].match(/(.+).org/) && argv.size != 1
         GetMultipleFiles.new(argv, os, "post").run()
       else
         p ["in qiita_org.rb", argv]
@@ -66,7 +66,7 @@ module QiitaOrg
 
       if argv.size > 2
         GetMultipleFiles.new(argv, os, "upload").run()
-      elsif argv[-1].match(/(.+).org/)
+      elsif argv[-1].match(/(.+).org/) && argv.size != 1
         GetMultipleFiles.new(argv, os, "upload").run()
       else
         p file = argv[0] || "README.org"
