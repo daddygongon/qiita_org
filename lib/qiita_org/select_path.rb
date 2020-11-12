@@ -2,10 +2,10 @@ class SelectPath
   def initialize()
   end
 
-  def select_path(mode)
+  def select_path(mode, teams_url)
     case mode
     when "teams"
-      qiita = @teams_url
+      qiita = teams_url
       path = "api/v2/items?page=1&per_page=100"
     else
       qiita = "https://qiita.com/"

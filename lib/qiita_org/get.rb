@@ -165,7 +165,7 @@ EOS
     end
 
     if @get_id == nil
-      @qiita, @path = @selectpath.select_path(@mode)
+      @qiita, @path = @selectpath.select_path(@mode, @teams_url)
       @items = AccessQiita.new(@access_token, @qiita, @path).access_qiita()
       select_report()
     else

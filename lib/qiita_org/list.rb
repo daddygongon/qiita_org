@@ -15,7 +15,7 @@ class QiitaList
       ErrorMessage.new().teams_url_error(@teams_url)
     end
 
-    @qiita, @path = SelectPath.new().select_path(@mode)
+    @qiita, @path = SelectPath.new().select_path(@mode, @teams_url)
     @items = AccessQiita.new(@access_token, @qiita, @path).access_qiita()
     view_list()
   end
