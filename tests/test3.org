@@ -1,4 +1,4 @@
-#+qiita_teams: bd41ced53b4b18701453
+# +qiita_teams: bd41ced53b4b18701453
 #+OPTIONS: ^:{}
 #+STARTUP: indent nolineimages
 #+TITLE: test

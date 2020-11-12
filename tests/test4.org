@@ -1,4 +1,4 @@
-#+qiita_private: 92b50b88e7da7aa25a1b
+# +qiita_private: 92b50b88e7da7aa25a1b
 #+OPTIONS: ^:{}
 #+STARTUP: indent nolineimages
 #+TITLE: title
