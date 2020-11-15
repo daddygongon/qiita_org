@@ -7,6 +7,7 @@ require "qiita_org/post"
 require "qiita_org/config"
 require "qiita_org/get"
 require "qiita_org/list"
+require "qiita_org/all"
 require "qiita_org/get_template"
 require "qiita_org/check_pc_os"
 require "qiita_org/upload"
@@ -123,16 +124,8 @@ module QiitaOrg
     desc "all", "post all org files in the directory"
 
     def all(*argv)
-      Dir.glob("*.org").each do |org|
-        puts org.blue
-        if File.read(org).match(/#\+qiita_(.+)/)
-          system ("qiita post #{org} open") if File.read(org).match(/#\+(.+)_public/)
-          system ("qiita post #{org} teams") if File.read(org).match(/#\+(.+)_teams/)
-          system ("qiita post #{org} private") if File.read(org).match(/#\+(.+)_private/)
-        else
-          system ("qiita post #{org}")
-        end
-      end
+      mode = argv[0] || false
+      All.new(mode).run()
     end
 
     desc "list [qiita/teams]", "view qiita report list"
