@@ -1,0 +1,4 @@
+--protected
+--no-private
+--markup markdown
+--plugin activesupport-concern
