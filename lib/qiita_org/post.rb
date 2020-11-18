@@ -144,6 +144,9 @@ class QiitaPost
       end
       print "%20s %s\n" % [key, cont]
     end
+    #if @display == "suppress"
+    #  puts @res_body["url"].green
+    #end
   end
 
   # add qiita_id on src.org
@@ -171,7 +174,7 @@ class QiitaPost
   def run()
     @conts = File.read(@src)
     @title, @tags = get_title_tags(@conts)
-    @access_token, @teams_url, @ox_qmd_load_path = SetConfig.new().set_config()
+    @access_token, @teams_url, @display, @ox_qmd_load_path = SetConfig.new().set_config()
 
     if @option == "teams"
       ErrorMessage.new().teams_url_error(@teams_url)
@@ -187,7 +190,7 @@ class QiitaPost
     get_and_print_qiita_return()
 
     #open_qiita()
-    FileOpen.new(@os).file_open(@res_body["url"])
+    FileOpen.new(@os).file_open(@res_body["url"]) if @display != "suppress"
 
     add_qiita_id_on_org()
 
