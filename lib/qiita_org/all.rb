@@ -9,6 +9,10 @@ class All
 
   def run()
     @files.each do |file|
+      if file == "template.org"
+        next
+      end
+
       unless @mode
         puts file.blue
         if File.read(file).match(/#\+qiita_(.+)/)
