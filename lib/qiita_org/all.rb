@@ -1,6 +1,6 @@
 require "colorize"
 
-class All
+class QiitaAll
   def initialize(mode)
     @mode = mode
     @files = Dir.glob("*.org")

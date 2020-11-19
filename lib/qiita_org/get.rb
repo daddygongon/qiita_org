@@ -159,7 +159,7 @@ EOS
   end
 
   def run()
-    @access_token, @teams_url, @ox_qmd_load_path = SetConfig.new().set_config()
+    @access_token, @teams_url, @display, @ox_qmd_load_path = SetConfig.new().set_config()
     if @mode == "teams"
       ErrorMessage.new().teams_url_error(@teams_url)
     end

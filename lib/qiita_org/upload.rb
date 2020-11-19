@@ -3,7 +3,7 @@ require "io/console"
 require "qiita_org/get_file_path.rb"
 require "qiita_org/show_file_and_url.rb"
 
-class UpLoad
+class QiitaUpLoad
   def initialize(src, option, os)
     @src = src
     @option = (option == "qiita" || option == "open")? "public" : option

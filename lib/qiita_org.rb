@@ -73,7 +73,7 @@ module QiitaOrg
         p file = argv[0] || "README.org"
         p mode = argv[1] || DecideOption.new(file).decide_option()
 
-        qiita = UpLoad.new(file, mode, os).upload()
+        qiita = QiitaUpLoad.new(file, mode, os).upload()
       end
 =begin
       getpath = GetFilePath.new(file)
@@ -125,7 +125,7 @@ module QiitaOrg
 
     def all(*argv)
       mode = argv[0] || false
-      All.new(mode).run()
+      QiitaAll.new(mode).run()
     end
 
     desc "list [qiita/teams]", "view qiita report list"
