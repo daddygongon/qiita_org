@@ -6,6 +6,7 @@
 /pkg/
 /spec/reports/
 /tmp/
+/gems/
 /gems/*
 /doc/*
 !/doc/.keep
