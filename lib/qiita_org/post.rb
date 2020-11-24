@@ -66,18 +66,7 @@ class QiitaPost
 
   # check twitter post
   def select_twitter(conts, option)
-    m = []
-    twitter = false
-    if option == "public"
-      m = conts.match(/\#\+(twitter|Twitter|TWITTER): (.+)/)
-      if m[2] == 'on' || m[2] == 'On' || m[2] == 'ON'
-        twitter = true
-      else
-        twitter = false
-      end
-    end
-    twitter
-    return twitter
+    option == "public" && conts.match?(/^\#\+twitter:\s*on$/i)
   end
 
   def select_option(option)
