@@ -42,4 +42,20 @@ RSpec.describe QiitaPost do
       expect(@post.select_option(val)).to eq res
     end
   end
+
+  it "check twitter option" do
+    [['test1.org', 'public', true],
+     ['test1.org', 'private', false],
+     ['test2.org', 'public', false],
+     ['test2.org', 'private', false],
+     ['test3.org', 'public', false],
+     ['test3.org', 'private', false],
+     ['test4.org', 'public', true],
+     ['test4.org', 'private', false]
+    ].each do |src, option, res|
+      p [src, option, res]
+      conts = File.read("spec/tests/#{src}")
+      expect(@post.select_twitter(conts, option)).to eq res
+    end
+  end
 end

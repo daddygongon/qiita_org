@@ -7,6 +7,7 @@
 # +OPTIONS:   H:4 toc:t num:2
 #+OPTIONS:   toc:nil
 #+TAG: test1, test2
+#+TWITTER: ON
 # +SETUPFILE: ~/.emacs.d/org-mode/theme-readtheorg.setup
 
 #+caption: test file
