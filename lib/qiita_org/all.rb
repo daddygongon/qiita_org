@@ -1,16 +1,19 @@
 require "colorize"
 
 class QiitaAll
-  def initialize(mode)
-    @mode = mode
+  def initialize(argv)
+    # @mode = mode
+    check_options(argv)
     @files = Dir.glob("*.org")
     p @files
   end
 
   def run()
     @files.each do |file|
-      if file == "template.org"
-        next
+      unless @exclude_files.empty?
+        if @exclude_files.include?(file)
+          next
+        end
       end
 
       unless @mode
@@ -26,6 +29,22 @@ class QiitaAll
         puts "qiita post #{file} #{@mode}".blue
         system "qiita post #{file} #{@mode}"
       end
+    end
+  end
+
+  def check_options(string)
+    ["teams", "private", "public"].each do |i|
+      if string.include?(i)
+        @mode = i
+        break
+      else
+        @mode = false
+      end
+    end
+
+    @exclude_files = []
+    if string.include?("--exclude")
+      @exclude_files = string.grep(/.org/)
     end
   end
 end

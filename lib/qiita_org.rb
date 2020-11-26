@@ -121,13 +121,11 @@ module QiitaOrg
       template = QiitaGetTemplate.new(os).run()
     end
 
-    desc "all", "post all org files in the directory"
-    method_options hoge: :string
+    desc "all [teams/public/private] [options]", "post all org files in the directory"
+
     def all(*argv)
-      mode = argv[0] || false
-      # p [argv[0], argv[1]]
-      puts options[:hoge]
-      QiitaAll.new(mode).run()
+      #mode = argv[0] || false
+      QiitaAll.new(argv).run()
     end
 
     desc "list [qiita/teams]", "view qiita report list"
