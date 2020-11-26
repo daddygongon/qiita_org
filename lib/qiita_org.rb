@@ -122,9 +122,11 @@ module QiitaOrg
     end
 
     desc "all", "post all org files in the directory"
-
+    method_options hoge: :string
     def all(*argv)
       mode = argv[0] || false
+      # p [argv[0], argv[1]]
+      puts options[:hoge]
       QiitaAll.new(mode).run()
     end
 

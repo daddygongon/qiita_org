@@ -3,6 +3,7 @@ require "qiita_org/get_file_url.rb"
 require "qiita_org/set_config.rb"
 require "qiita_org/access_qiita.rb"
 require "qiita_org/file_open.rb"
+require "qiita_org/error_message.rb"
 
 class ShowFile
   def initialize(paths, src, mode, os)
@@ -52,7 +53,7 @@ class ShowFile
 
     @access_token, @teams_url, @display, @ox_qmd_load_path = SetConfig.new().set_config()
     if @mode == "teams"
-      ErrorMassage.new().teams_url_error(@teams_url)
+      ErrorMessage.new().teams_url_error(@teams_url)
     end
 
     qiita = (@mode == "teams") ? @teams_url : "https://qiita.com/"
