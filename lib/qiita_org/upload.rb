@@ -12,21 +12,28 @@ class QiitaUpLoad
     @option = (option == "qiita" || option == "open")? "public" : option
     @os = os
     @fileopen = FileOpen.new(@os)
+    @access_token, @teams_url, @display, @ox_qmd_load_path = SetConfig.new().set_config()
+    if @option == "teams"
+      ErrorMessage.new().teams_url_error(@teams_url)
+    end
   end
 
   def upload()
-    paths = GetFilePath.new(@src).get_file_path()
-    #paths = get_file_path(@src)
+    #paths = GetFilePath.new(@src).get_file_path()
+    paths = get_file_path(@src)
     unless paths.empty?
-      showfile = ShowFile.new(paths, @src, @option, @os)
-      showfile.open_file_dir() #open_file_dir(paths)
-      showfile.open_qiita() #open_qiita()
+      #showfile = ShowFile.new(paths, @src, @option, @os)
+      #showfile.open_file_dir()
+      open_file_dir(paths)
+      #showfile.open_qiita()
+      open_qiita()
 
       puts "Overwrite file URL's on #{@src}? (y/n)".green
       ans = STDIN.getch
 
       if ans == "y"
-        showfile.input_url_to_org()
+        #showfile.input_url_to_org()
+        input_url_to_org(paths)
       end
     else
       puts "file path is empty.".red
@@ -65,17 +72,20 @@ class QiitaUpLoad
 
   def open_qiita()
     conts = File.read(@src)
-    id = conts.match(/\#\+qiita_#{option}: (.+)/)[1]
+    id = conts.match(/\#\+qiita_#{@option}: (.+)/)[1]
 
+=begin
     @access_token, @teams_url, @display, @ox_qmd_load_path = SetConfig.new().set_config()
     if @option == "teams"
       ErrorMassage.new().teams_url_error(@teams_url)
     end
+=end
 
     qiita = (@option == "teams") ? @teams_url : "https://qiita.com/"
     path = "api/v2/items/#{id}"
 
-    items = AccessQiita.new(@access_token, qiita, path).access_qiita()
+    @access = AccessQiita.new(@access_token, qiita, path)
+    items = @access.access_qiita()
 
     @fileopen.file_open(items["url"])
   end
@@ -96,5 +106,15 @@ class QiitaUpLoad
     end
 
     File.write(@src, lines.join)
+  end
+
+  def get_file_url(id, file_name)
+    qiita = (@option == "teams")? @teams_url : "https://qiita.com/"
+    path = "api/v2/items/#{@id}"
+
+    items = @access.access_qiita()
+
+    file_url = items["body"].match(/\!\[#{file_name}\]\(((.+))\)/)[2]
+    return file_url
   end
 end
