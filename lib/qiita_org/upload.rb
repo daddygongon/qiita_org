@@ -6,7 +6,7 @@ require "qiita_org/file_open.rb"
 require "qiita_org/set_config.rb"
 require "qiita_org/access_qiita.rb"
 
-class QiitaUpLoad
+class QiitaFileUpLoad
   def initialize(src, option, os)
     @src = src
     @option = (option == "qiita" || option == "open")? "public" : option

@@ -31,7 +31,7 @@ class GetMultipleFiles
           qiita.run
         end
       elsif @type == "upload"
-        UpLoad.new(file, mode, @os).upload()
+        QiitaFileUpLoad.new(file, mode, @os).upload()
       end
     end
   end

@@ -73,7 +73,7 @@ module QiitaOrg
         p file = argv[0] || "README.org"
         p mode = argv[1] || DecideOption.new(file).decide_option()
 
-        qiita = QiitaUpLoad.new(file, mode, os).upload()
+        qiita = QiitaFileUpLoad.new(file, mode, os).upload()
       end
 =begin
       getpath = GetFilePath.new(file)
