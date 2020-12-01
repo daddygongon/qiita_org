@@ -117,8 +117,10 @@ module QiitaOrg
     def template(*argv)
       checkos = CheckPcOs.new
       os = checkos.return_os()
+      filename = argv[0] || "template"
+      filename = "#{filename}.org"
 
-      template = QiitaGetTemplate.new(os).run()
+      template = QiitaGetTemplate.new(os, filename).run()
     end
 
     desc "all [teams/public/private] [options]", "post all org files in the directory"
