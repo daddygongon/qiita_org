@@ -117,8 +117,8 @@ module QiitaOrg
     def template(*argv)
       checkos = CheckPcOs.new
       os = checkos.return_os()
-      filename = argv[0] || "template"
-      filename = "#{filename}.org"
+      filename = argv[0] || "template.org"
+      filename = (filename.include?(".org"))? filename : "#{filename}.org"
 
       template = QiitaGetTemplate.new(os, filename).run()
     end
