@@ -8,6 +8,7 @@ require "qiita_org/md_converter_for_image"
 require "qiita_org/set_config.rb"
 require "qiita_org/error_message"
 require "qiita_org/file_open.rb"
+require "qiita_org/access_qiita.rb"
 
 class QiitaPost
   def initialize(file, option, os)
@@ -62,6 +63,26 @@ class QiitaPost
       qiita_id = ""
     end
     return qiita_id, patch
+  end
+
+  def check_change_public(conts, option, id)
+    qiita = "https://qiita.com/"
+    path = "api/v2/items/#{id}"
+    items = AccessQiita.new(@access_token, qiita, path).access_qiita()
+
+    if items["private"]
+      return conts, option
+    else
+      option = "public"
+      lines = File.readlines(@src)
+      file = File.open(@src, "w")
+      lines.each_with_index do |line, i|
+        lines[i] = "#+qiita_#{option}: #{id}\n" if line.match(/\#\+qiita_private: (.+)/)
+        file.print(lines[i])
+      end
+      conts = File.read(@src)
+      return conts, option
+    end
   end
 
   # check twitter post
@@ -173,6 +194,7 @@ class QiitaPost
     add_source_path_in_md()
     @lines = MdConverter.new().convert_for_image(@lines)
     @qiita_id, @patch = select_patch_or_post(@conts, @option)
+    @conts, @option = check_change_public(@conts, @option, @qiita_id) if (@patch and @option == "private")
     @twitter = select_twitter(@conts, @option)
     @qiita, @private = select_option(@option)
     @res = qiita_post()

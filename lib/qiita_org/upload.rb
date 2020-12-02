@@ -97,7 +97,7 @@ class QiitaFileUpLoad
 
     paths.each do |path|
       file_name = File.basename(path).strip
-      url = get_file_url(id, file_name)
+      url = (get_file_url(id, file_name))? @file_url : next
       lines.each_with_index do |line, i|
         if line.match(/\[\[file:#{path}\]\]/)
           lines[i] = "[[#{url}][file:#{path}]]\n"
@@ -114,7 +114,13 @@ class QiitaFileUpLoad
 
     items = @access.access_qiita()
 
-    file_url = items["body"].match(/\!\[#{file_name}\]\(((.+))\)/)[2]
-    return file_url
+    if items["body"].match?(/\!\[#{file_name}\]\(((.+))\)/)
+      @file_url = items["body"].match(/\!\[#{file_name}\]\(((.+))\)/)[2]
+      puts "Wrote #{file_name}'s URL".green
+      return true
+    else
+      puts "Can not find #{file_name}'s URL".red
+      return false
+    end
   end
 end
