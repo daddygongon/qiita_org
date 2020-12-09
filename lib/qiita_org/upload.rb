@@ -1,9 +1,9 @@
 require "colorize"
 require "io/console"
-require "qiita_org/get_file_path.rb"
-require "qiita_org/show_file_and_url.rb"
+#require "qiita_org/get_file_path.rb"
+#require "qiita_org/show_file_and_url.rb"
 require "qiita_org/file_open.rb"
-require "qiita_org/set_config.rb"
+#require "qiita_org/set_config.rb"
 require "qiita_org/access_qiita.rb"
 
 class QiitaFileUpLoad
@@ -12,7 +12,8 @@ class QiitaFileUpLoad
     @option = (option == "qiita" || option == "open")? "public" : option
     @os = os
     @fileopen = FileOpen.new(@os)
-    @access_token, @teams_url, @display, @ox_qmd_load_path = SetConfig.new().set_config()
+    # @access_token, @teams_url, @display, @ox_qmd_load_path = SetConfig.new().set_config()
+    @access_token, @teams_url, @display, @ox_qmd_load_path = QiitaBase.new().set_config()
     if @option == "teams"
       ErrorMessage.new().teams_url_error(@teams_url)
     end

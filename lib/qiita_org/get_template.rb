@@ -1,15 +1,16 @@
 require "fileutils"
 require "colorize"
 require "kconv"
-require "qiita_org/search_conf_path"
+#require "qiita_org/search_conf_path"
 require "qiita_org/error_message.rb"
 
 class QiitaGetTemplate
   def initialize(os, filename)
     @os = os
     @filename = filename
-    search = SearchConfPath.new(Dir.pwd, Dir.home)
-    @conf_dir = search.search_conf_path()
+    #search = SearchConfPath.new(Dir.pwd, Dir.home)
+    # @conf_dir = search.search_conf_path()
+    @conf_dir = QiitaBase.new().search_conf_path(Dir.pwd, Dir.home)
     # check_write_header()
   end
 
@@ -116,6 +117,7 @@ class QiitaGetTemplate
     end
   end
 
+=begin
   def get_name()
     conts = File.readlines(@filename)
     p "Type your name"
@@ -131,6 +133,7 @@ class QiitaGetTemplate
     conts[4] = "#+EMAIL:     (concat \"#{email.chomp}\")\n"
     File.write(@filename, conts.join)
   end
+=end
 
   def set_name_and_email()
     conf_path = File.join(@conf_dir, ".qiita.conf")

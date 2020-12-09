@@ -7,8 +7,9 @@ class QiitaConfig
     @option = option
     @input = input
     if status == "local"
-      search = SearchConfPath.new(Dir.pwd, Dir.home)
-      conf_dir = search.search_conf_path()
+      #search = SearchConfPath.new(Dir.pwd, Dir.home)
+      #conf_dir = search.search_conf_path()
+      conf_dir = QiitaBase.new().search_conf_path(Dir.pwd, Dir.home)
       if @option == "set"
         @setup = File.join(Dir.pwd, ".qiita.conf")
       else

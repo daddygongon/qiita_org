@@ -3,8 +3,8 @@ require "json"
 require "open-uri"
 require "io/console"
 require "colorize"
-require "qiita_org/select_path.rb"
-require "qiita_org/set_config.rb"
+#require "qiita_org/select_path.rb"
+#require "qiita_org/set_config.rb"
 require "qiita_org/error_message.rb"
 require "qiita_org/access_qiita.rb"
 
@@ -12,46 +12,9 @@ class QiitaGet
   def initialize(mode, id)
     @mode = mode
     @get_id = id
-    @selectpath = SelectPath.new()
+    @base = QiitaBase.new()
+    # @selectpath = SelectPath.new()
   end
-
-  # select path
-=begin
-  def select_path(mode)
-    case mode
-    when "teams"
-      qiita = @teams_url
-      path = "api/v2/items?page=1&per_page=100"
-    else
-      qiita = "https://qiita.com/"
-      path = "api/v2/authenticated_user/items?page=1&per_page=100"
-    end
-    return qiita, path
-  end
-=end
-
-  # access qiita
-=begin
-  def access_qiita()
-    uri = URI.parse(@qiita + @path)
-
-    headers = { "Authorization" => "Bearer # {@access_token}",
-      "Content-Type" => "application/json" }
-
-    begin
-      response = URI.open(
-                          "# {uri}",
-                          "Authorization" => "# {headers["Authorization"]}",
-                          )
-      #raise "NOT FOUND: # {@get_id} report".red
-    rescue => e
-      puts "# {$!}".red
-      exit
-    else
-      @items = JSON.parse(response.read)
-    end
-  end
-=end
 
   # select report
   def select_report()
@@ -159,13 +122,13 @@ EOS
   end
 
   def run()
-    @access_token, @teams_url, @display, @ox_qmd_load_path = SetConfig.new().set_config()
+    @access_token, @teams_url, @display, @ox_qmd_load_path = @base.set_config()
     if @mode == "teams"
       ErrorMessage.new().teams_url_error(@teams_url)
     end
 
     if @get_id == nil
-      @qiita, @path = @selectpath.select_path(@mode, @teams_url)
+      @qiita, @path = @base.select_access_path(@mode, @teams_url)
       @items = AccessQiita.new(@access_token, @qiita, @path).access_qiita()
       select_report()
     else

@@ -5,7 +5,7 @@ require "json"
 require "command_line/global"
 require "colorize"
 require "qiita_org/md_converter_for_image"
-require "qiita_org/set_config.rb"
+#require "qiita_org/set_config.rb"
 require "qiita_org/error_message"
 require "qiita_org/file_open.rb"
 require "qiita_org/access_qiita.rb"
@@ -15,6 +15,7 @@ class QiitaPost
     @src = file
     @option = (option == "qiita" || option == "open")? "public" : option
     @os = os
+    @base = QiitaBase.new
   end
 
   public
@@ -167,24 +168,11 @@ class QiitaPost
     end
   end
 
-  # open qiita
-=begin
-  def open_qiita()
-    if @os == "mac"
-      system "open # {@res_body["url"]}"
-    elsif @os == "windows"
-      system "explorer.exe # {@res_body["url"]}"
-    else
-      system "open # {@res_body["url"]}"
-      system "xdg-open # {@res_body["url"]}"
-    end
-  end
-=end
-
   def run()
     @conts = File.read(@src)
     @title, @tags = get_title_tags(@conts)
-    @access_token, @teams_url, @display, @ox_qmd_load_path = SetConfig.new().set_config()
+    # @access_token, @teams_url, @display, @ox_qmd_load_path = SetConfig.new().set_config()
+    @access_token, @teams_url, @display, @ox_qmd_load_path = @base.set_config()
 
     if @option == "teams"
       ErrorMessage.new().teams_url_error(@teams_url)
