@@ -117,24 +117,6 @@ class QiitaGetTemplate
     end
   end
 
-=begin
-  def get_name()
-    conts = File.readlines(@filename)
-    p "Type your name"
-    name = STDIN.gets
-    conts[3] = "#+AUTHOR: #{name}"
-    File.write(@filename, conts.join)
-  end
-
-  def get_email()
-    conts = File.readlines(@filename)
-    p "Type your email"
-    email = STDIN.gets
-    conts[4] = "#+EMAIL:     (concat \"#{email.chomp}\")\n"
-    File.write(@filename, conts.join)
-  end
-=end
-
   def set_name_and_email()
     conf_path = File.join(@conf_dir, ".qiita.conf")
     conf = JSON.load(File.read(conf_path))

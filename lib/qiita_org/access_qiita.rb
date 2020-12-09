@@ -20,8 +20,6 @@ class AccessQiita
                           "Authorization" => "#{headers["Authorization"]}",
                           )
     rescue => e
-      #puts "#{$!}".red
-      #exit
       ErrorMessage.new().qiita_access_error(e)
     else
       items = JSON.parse(response.read)
