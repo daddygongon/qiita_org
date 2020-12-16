@@ -98,7 +98,12 @@ class QiitaFileUpLoad
 
     paths.each do |path|
       file_name = File.basename(path).strip
-      url = (get_file_url(id, file_name))? @file_url : next
+      #url = (get_file_url(id, file_name)) ? @file_url : next
+      if get_file_url(id, file_name)
+        url = @file_url
+      else
+        next
+      end
       lines.each_with_index do |line, i|
         if line.match(/\[\[file:#{path}\]\]/)
           lines[i] = "[[#{url}][file:#{path}]]\n"

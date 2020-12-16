@@ -75,4 +75,14 @@ class QiitaBase
 
     return access_token, teams_url, display, ox_qmd_load_path
   end
+
+  def file_open(os, order)
+    if os == "mac"
+      system "open #{order}"
+    elsif os == "windows"
+      system "explorer.exe #{order}"
+    else
+      system "xdg-open #{order}"
+    end
+  end
 end
