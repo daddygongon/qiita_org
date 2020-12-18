@@ -15,18 +15,18 @@ RSpec.describe QiitaPost do
   end
 
   it "check patch or post" do
-    [['test1.org',"private","",false],
-     ['test1.org',"public","",false],
+    [['test1.org',"private",nil,false],
+     ['test1.org',"public",nil,false],
      ['test2.org',"teams","teamshoge",true],
      ['test2.org',"private","privatehoge",true],
-     ['test2.org',"public","",false],
+     ['test2.org',"public",nil,false],
      ['test3.org',"public","publichoge",true],
      ['test3.org',"private","privatehoge",true],
-     ['test3.org',"teams","",false]
+     ['test3.org',"teams",nil,false]
     ].each do |src, option, qiita_id, patch|
-      conts = File.read("spec/tests/#{src}")
+      #conts = File.read("spec/tests/# {src}")
       p [src, qiita_id, patch]
-      expect(@post.select_patch_or_post(conts, option)).to eq [qiita_id, patch]
+      expect(@post.select_patch_or_post("spec/tests/#{src}", option)).to eq [qiita_id, patch]
     end
   end
 

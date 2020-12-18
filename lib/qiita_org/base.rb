@@ -85,4 +85,14 @@ class QiitaBase
       system "xdg-open #{order}"
     end
   end
+
+  def get_report_id(src, option)
+    conts = File.read(src)
+    if conts.match?(/^\#\+qiita_#{option}:\s(.+)/)
+      id = conts.match(/\#\+qiita_#{option}: (.+)/)[1]
+    else
+      id = nil
+    end
+    return id
+  end
 end

@@ -1,4 +1,4 @@
-RSpec.describe DecideOption do
+RSpec.describe QiitaBase do
   it "check decide option" do
     [['test1.org', 'private'],
      ['test2.org', 'teams'],
@@ -6,7 +6,7 @@ RSpec.describe DecideOption do
      ['test4.org', 'private']
     ].each do |src, option|
       p [src, option]
-      expect(DecideOption.new("spec/tests/#{src}").decide_option()).to eq option
+      expect(QiitaBase.new().pick_up_option("spec/tests/#{src}")).to eq option
     end
   end
 end

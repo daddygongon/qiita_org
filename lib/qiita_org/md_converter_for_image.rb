@@ -1,6 +1,6 @@
 class MdConverter
   def initialize()
-    # @lines = lines
+
   end
 
   def convert_for_image(lines)

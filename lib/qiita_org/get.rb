@@ -3,8 +3,6 @@ require "json"
 require "open-uri"
 require "io/console"
 require "colorize"
-#require "qiita_org/select_path.rb"
-#require "qiita_org/set_config.rb"
 require "qiita_org/error_message.rb"
 require "qiita_org/access_qiita.rb"
 
@@ -13,7 +11,6 @@ class QiitaGet
     @mode = mode
     @get_id = id
     @base = QiitaBase.new()
-    # @selectpath = SelectPath.new()
   end
 
   # select report
@@ -104,7 +101,6 @@ EOS
     @path = "api/v2/items/#{@get_id}"
 
     @items = AccessQiita.new(@access_token, @qiita, @path).access_qiita()
-    #access_qiita()
 
     @title = @items["title"]
     @id = @items["id"]

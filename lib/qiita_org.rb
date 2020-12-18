@@ -9,21 +9,12 @@ require "qiita_org/get"
 require "qiita_org/list"
 require "qiita_org/all"
 require "qiita_org/get_template"
-#require "qiita_org/check_pc_os"
 require "qiita_org/upload"
-#require "qiita_org/get_file_path"
-#require "qiita_org/show_file_and_url"
-#require "qiita_org/decide_option"
 require "qiita_org/get_multiple_files"
 require "qiita_org/base"
-#require "qiita_org/qiita_org_thor"
 
 module QiitaOrg
   class CLI < Thor
-    #    def initialize(*argv)
-    #      super(*argv)
-    #    end
-    #
     def initialize(*argv)
       super(*argv)
       @base = QiitaBase.new()
@@ -39,28 +30,25 @@ module QiitaOrg
     desc "post [FILE] [private/public/teams]", "post to qiita from org"
 
     def post(*argv)
-      #checkos = CheckPcOs.new
-      #os = checkos.return_os()
       os = @base.check_pc_os()
 
       if argv.size > 2
         GetMultipleFiles.new(argv, os, "post").run()
-      elsif argv.size > 1
+      else #if argv.size > 1
         if argv[-1].match(/(.+).org/)
           GetMultipleFiles.new(argv, os, "post").run()
-        end
-      else
-        p ["in qiita_org.rb", argv]
-        p file = argv[0] || "README.org"
-        #p mode = argv[1] || DecideOption.new(file).decide_option()
-        p mode = argv[1] || @base.pick_up_option(file)
-        qiita = QiitaPost.new(file, mode, os)
-        begin
-          qiita.select_option(mode)
-        rescue RuntimeError => e
-          puts $!
         else
-          qiita.run
+          p ["in qiita_org.rb", argv]
+          p file = argv[0] || "README.org"
+          p mode = argv[1] || @base.pick_up_option(file)
+          qiita = QiitaPost.new(file, mode, os)
+          begin
+            qiita.select_option(mode)
+          rescue RuntimeError => e
+            puts $!
+          else
+            qiita.run
+          end
         end
       end
     end
@@ -68,22 +56,19 @@ module QiitaOrg
     desc "upload [FILE] [teams/public/private]", "upload about image to qiita"
 
     def upload(*argv)
-      #checkos = CheckPcOs.new
-      #os = checkos.return_os()
       os = @base.check_pc_os()
 
       if argv.size > 2
         GetMultipleFiles.new(argv, os, "upload").run()
-      elsif argv.size > 1
+      else #if argv.size > 1
         if argv[-1].match(/(.+).org/)
           GetMultipleFiles.new(argv, os, "upload").run()
-        end
-      else
-        p file = argv[0] || "README.org"
-        #p mode = argv[1] || DecideOption.new(file).decide_option()
-        p mode = argv[1] || @base.pick_up_option(file)
+        else
+          p file = argv[0] || "README.org"
+          p mode = argv[1] || @base.pick_up_option(file)
 
-        qiita = QiitaFileUpLoad.new(file, mode, os).upload()
+          qiita = QiitaFileUpLoad.new(file, mode, os).upload()
+        end
       end
     end
 
@@ -109,8 +94,6 @@ module QiitaOrg
     desc "template", "make template.org"
 
     def template(*argv)
-      #checkos = CheckPcOs.new
-      #os = checkos.return_os()
       os = @base.check_pc_os()
       filename = argv[0] || "template.org"
       filename = (filename.include?(".org"))? filename : "#{filename}.org"
@@ -121,7 +104,6 @@ module QiitaOrg
     desc "all [teams/public/private] [options]", "post all org files in the directory"
 
     def all(*argv)
-      #mode = argv[0] || false
       QiitaAll.new(argv).run()
     end
 

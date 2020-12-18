@@ -1,9 +1,5 @@
 require "colorize"
 require "io/console"
-#require "qiita_org/get_file_path.rb"
-#require "qiita_org/show_file_and_url.rb"
-require "qiita_org/file_open.rb"
-#require "qiita_org/set_config.rb"
 require "qiita_org/access_qiita.rb"
 
 class QiitaFileUpLoad
@@ -11,31 +7,21 @@ class QiitaFileUpLoad
     @src = src
     @option = (option == "qiita" || option == "open")? "public" : option
     @os = os
-    @fileopen = FileOpen.new(@os)
-    # @access_token, @teams_url, @display, @ox_qmd_load_path = SetConfig.new().set_config()
+    @base = QiitaBase.new()
     @access_token, @teams_url, @display, @ox_qmd_load_path = QiitaBase.new().set_config()
-    if @option == "teams"
-      ErrorMessage.new().teams_url_error(@teams_url)
-    end
+    ErrorMessage.new().teams_url_error(@teams_url) if @option == "teams"
   end
 
   def upload()
-    #paths = GetFilePath.new(@src).get_file_path()
     paths = get_file_path(@src)
     unless paths.empty?
-      #showfile = ShowFile.new(paths, @src, @option, @os)
-      #showfile.open_file_dir()
       open_file_dir(paths)
-      #showfile.open_qiita()
       open_qiita()
 
       puts "Overwrite file URL's on #{@src}? (y/n)".green
       ans = STDIN.getch
 
-      if ans == "y"
-        #showfile.input_url_to_org()
-        input_url_to_org(paths)
-      end
+      input_url_to_org(paths) if ans == "y"
     else
       puts "file path is empty.".red
     end
@@ -60,27 +46,19 @@ class QiitaFileUpLoad
   def open_file_dir(paths)
     previous_paths = []
     previous_paths << File.join(paths[0].split("/")[0..-2])
-    @fileopen.file_open(File.join(paths[0].split("/")[0..-2]))
+    @base.file_open(@os, File.join(paths[0].split("/")[0..-2]))
 
     paths.each do |path|
       dir_path = File.join(path.split("/")[0..-2])
       unless previous_paths.include?(dir_path)
         previous_paths << dir_path
-        @fileopen.file_open(dir_path)
+        @base.file_open(@os, dir_path)
       end
     end
   end
 
   def open_qiita()
-    conts = File.read(@src)
-    id = conts.match(/\#\+qiita_#{@option}: (.+)/)[1]
-
-=begin
-    @access_token, @teams_url, @display, @ox_qmd_load_path = SetConfig.new().set_config()
-    if @option == "teams"
-      ErrorMassage.new().teams_url_error(@teams_url)
-    end
-=end
+    id = QiitaBase.new().get_report_id(@src, @option)
 
     qiita = (@option == "teams") ? @teams_url : "https://qiita.com/"
     path = "api/v2/items/#{id}"
@@ -88,7 +66,7 @@ class QiitaFileUpLoad
     @access = AccessQiita.new(@access_token, qiita, path)
     items = @access.access_qiita()
 
-    @fileopen.file_open(items["url"])
+    @base.file_open(@os, items["url"])
   end
 
   def input_url_to_org(paths)

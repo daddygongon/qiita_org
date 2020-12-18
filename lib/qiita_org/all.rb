@@ -10,9 +10,10 @@ class QiitaAll
   def run()
     @files.each do |file|
       unless @exclude_files.empty?
-        if @exclude_files.include?(file)
-          next
-        end
+        next if @exclude_files.include?(file)
+        #if @exclude_files.include?(file)
+         # next
+        #end
       end
 
       unless @mode

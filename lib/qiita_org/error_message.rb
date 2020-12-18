@@ -8,6 +8,8 @@ class ErrorMessage
   def access_token_error(access_token)
     if access_token == ""
       puts "Please setting ACCESS_TOKEN".red
+      puts "Hint: qiita config global access_token 'your access_token'".red
+      puts "Hint: qiita config local access_token 'your access_token'".red
       exit
     end
   end
@@ -15,6 +17,8 @@ class ErrorMessage
   def teams_url_error(teams_url)
     if teams_url == ""
       puts "Please setting teams_url".red
+      puts "Hint: qiita config global teams_url 'https://foge.qiita.com/'".red
+      puts "Hint: qiita config local teams_url 'https://foge.qiita.com/'".red
       exit
     end
   end
@@ -77,8 +81,8 @@ class ErrorMessage
 
   def md_file_exists?(src, res)
     unless File.exists?(src.gsub(".org", ".md"))
-      puts "Can not make #{src.gsub(".org", ".md")}".red
-      puts "Please confirm emacs version.".red
+      puts "Can not transform #{src.gsub(".org", ".md")} from #{src}, please chech org syntax.".red
+      puts "Please confirm emacs version it 26 or more.".red
       exit
     else
       p res

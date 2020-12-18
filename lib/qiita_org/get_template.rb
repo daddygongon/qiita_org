@@ -1,17 +1,13 @@
 require "fileutils"
 require "colorize"
 require "kconv"
-#require "qiita_org/search_conf_path"
 require "qiita_org/error_message.rb"
 
 class QiitaGetTemplate
   def initialize(os, filename)
     @os = os
     @filename = filename
-    #search = SearchConfPath.new(Dir.pwd, Dir.home)
-    # @conf_dir = search.search_conf_path()
     @conf_dir = QiitaBase.new().search_conf_path(Dir.pwd, Dir.home)
-    # check_write_header()
   end
 
   def get_macos_version()
@@ -102,17 +98,6 @@ class QiitaGetTemplate
         if ans == "y"
           send("get_#{src.downcase}_version")
         end
-      end
-    end
-  end
-
-  def check_write_header()
-    ["name", "email"].each do |src|
-      print "Write your #{src}?(y/n) "
-      ans = STDIN.gets.chomp
-      next if ans == "n"
-      if ans == "y"
-        send("get_#{src}")
       end
     end
   end

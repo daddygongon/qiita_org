@@ -1,8 +1,6 @@
 require "colorize"
-#require "../qiita_org/qiita_org.rb"
 require "qiita_org/post.rb"
 require "qiita_org/upload.rb"
-#require "qiita_org/decide_option.rb"
 
 class GetMultipleFiles
   def initialize(files, os, type)
@@ -17,9 +15,8 @@ class GetMultipleFiles
   end
 
   def run()
-    puts "post files: #{@files}".green
+    puts "#{@type} files: #{@files}".green
     @files.each do |file|
-      #mode = @option || DecideOption.new(file).decide_option()
       mode = @option || QiitaBase.new().pick_up_option(file)
       puts "qiita #{@type} #{file} #{mode}".green
       if @type == "post"
