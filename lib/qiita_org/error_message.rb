@@ -81,8 +81,10 @@ class ErrorMessage
 
   def md_file_exists?(src, res)
     unless File.exists?(src.gsub(".org", ".md"))
-      puts "Can not transform #{src.gsub(".org", ".md")} from #{src}, please chech org syntax.".red
-      puts "Please confirm emacs version it 26 or more.".red
+      #puts "Can not transform #{src.gsub(".org", ".md")} from #{src}, please chech org syntax.".red
+      #puts "Please confirm emacs version it 26 or more.".red
+      puts "Can not convert org doc to markdown.".red
+      puts "Check the org doc description converting in emacs by 'ctrl+c, ctrl+e, h, o', or emacs version above 26.".red
       exit
     else
       p res
