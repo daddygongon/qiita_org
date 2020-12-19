@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    qiita_org (0.1.33)
+    qiita_org (0.1.34)
       colorize
       command_line (> 2.0.0)
       fileutils
