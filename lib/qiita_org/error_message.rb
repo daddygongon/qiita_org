@@ -7,18 +7,18 @@ class ErrorMessage
 
   def access_token_error(access_token)
     if access_token == ""
-      puts "Please setting ACCESS_TOKEN".red
-      puts "Hint: qiita config global access_token 'your access_token'".red
-      puts "Hint: qiita config local access_token 'your access_token'".red
+      puts "Please setting ACCESS_TOKEN.".red
+      puts "Hint: qiita config global access_token 'your access_token'.".red
+      puts "Hint: qiita config local access_token 'your access_token'.".red
       exit
     end
   end
 
   def teams_url_error(teams_url)
     if teams_url == ""
-      puts "Please setting teams_url".red
-      puts "Hint: qiita config global teams_url 'https://foge.qiita.com/'".red
-      puts "Hint: qiita config local teams_url 'https://foge.qiita.com/'".red
+      puts "Please setting teams_url.".red
+      puts "Hint: qiita config global teams_url 'https://foge.qiita.com/'.".red
+      puts "Hint: qiita config local teams_url 'https://foge.qiita.com/'.".red
       exit
     end
   end
@@ -61,17 +61,17 @@ class ErrorMessage
     check = true
 
     if conf["name"] == ""
-      puts "Please set your name in config".red
-      puts "Hint: qiita config global name 'YOUR NAME'".red
-      puts "Hint: qiita config local name 'YOUR NAME'".red
+      puts "Please set your name in config.".red
+      puts "Hint: qiita config global name 'YOUR NAME'.".red
+      puts "Hint: qiita config local name 'YOUR NAME'.".red
 #      system "rm template.org"
       check = false
     end
 
     if conf["email"] == ""
-      puts "Please set your email in config".red
-      puts "Hint: qiita config global email 'youremail@example.com'".red
-      puts "Hint: qiita config local name 'youremail@example.com'".red
+      puts "Please set your email in config.".red
+      puts "Hint: qiita config global email 'your_email@example.com'.".red
+      puts "Hint: qiita config local name 'your_email@example.com'.".red
       check = false
     end
     unless check
@@ -81,10 +81,9 @@ class ErrorMessage
 
   def md_file_exists?(src, res)
     unless File.exists?(src.gsub(".org", ".md"))
-      #puts "Can not transform #{src.gsub(".org", ".md")} from #{src}, please chech org syntax.".red
-      #puts "Please confirm emacs version it 26 or more.".red
       puts "Can not convert org doc to markdown.".red
-      puts "Check the org doc description converting in emacs by 'ctrl+c, ctrl+e, h, o', or emacs version above 26.".red
+      puts 'Please confirm emacs version above 26.'.red
+      puts "Next, check links in the org doc, as converting in emacs by 'ctrl+c, ctrl+e, h, o'.".red
       exit
     else
       p res
