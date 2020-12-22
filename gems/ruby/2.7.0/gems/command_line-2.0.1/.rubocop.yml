@@ -1,0 +1,21 @@
+AllCops:
+  TargetRubyVersion: 2.5
+  Exclude:
+  - '*.gemspec'
+  - Gemfile
+  - Rakefile
+  - spec/fixtures/**/*
+  - bin/**/*
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+Metrics/AbcSize:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Style/RescueModifier:
+  Enabled: false

@@ -1,0 +1,8 @@
+CHANGELOG.md
+Manifest.txt
+README.md
+Rakefile
+lib/pandoc.rb
+lib/pandoc/version.rb
+test/helper.rb
+test/test_builder.rb
