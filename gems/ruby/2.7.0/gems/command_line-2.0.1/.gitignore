@@ -1,7 +1,0 @@
-/.bundle/
-/.yardoc
-/pkg/
-/spec/reports/
-/spec/examples.txt
-/doc
-Gemfile.lock
