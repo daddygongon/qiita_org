@@ -22,14 +22,51 @@ class QiitaPost
     @title = m ?  m[2] : "テスト"
     @tags = if m = conts.match(/\#\+(TAG|tag|Tag|tags|TAGS|Tags): (.+)/)
               ErrorMessage.new().many_tags_error(m[2])
-              m[2].split(",").inject([]) do |l, c|
-                 l << { name: c.strip } #, versions: []}
-              end
+              check_tags(m[2])
+              #m[2].split(",").inject([]) do |l, c|
+                 #l << { name: c.strip } #, versions: []}
+              #end
             else
-              [{ name: "hoge" }] #, versions: [] }]
+              new_tags = get_tags()
+              #[{ name: "hoge" }] #, versions: [] }]
+              check_tags(new_tags)
             end
     p @tags
     return @title, @tags
+  end
+
+  #chack tags "hoge" or "hoge2"
+  def check_tags(tags)
+    if tags.include?("hoge" || "hoge2")
+      new_tags = get_tags()
+      tags = []
+      new_tags.each do |tag|
+        tags << { name: tag.strip }
+      end
+    else
+      tags = tags.split(",").inject([]) do |l, c|
+        l << { name: c.strip } #, versions: []}
+      end
+    end
+
+    return tags
+  end
+
+  def get_tags()
+    tags = []
+    count = 0
+    puts "Please input tags, or 'e' for end."
+    while count < 5 do
+      p "tag#{count+1}:"
+      string = STDIN.gets.chomp
+      if string == 'e'
+        count = 5
+      else
+        tags << string
+      end
+      count += 1
+    end
+    return tags
   end
 
   # src.org -> src.md
@@ -153,12 +190,24 @@ class QiitaPost
     #end
   end
 
-  # add qiita_id on src.org
+  # add qiita_id on src.org, and add tags
   def add_qiita_id_on_org()
     @qiita_id = @res_body["id"]
     unless @patch
       File.write(@src, "#+qiita_#{@option}: #{@qiita_id}\n" + @conts)
     end
+    new_tags = []
+    @res_body["tags"].each do |tag|
+      new_tags << tag["name"]
+    end
+    new_lines = File.readlines(@src)
+    new_lines.each_with_index do |line, i|
+      if line.match(/\#\+(TAG|tag|Tag|tags|TAGS|Tags): (.+)/)
+        new_lines[i] = "#+TAG: #{new_tags.join(", ")}\n"
+        break
+      end
+    end
+    File.write(@src, new_lines.join)
   end
 
   def run()
