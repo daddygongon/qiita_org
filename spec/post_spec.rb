@@ -59,12 +59,12 @@ RSpec.describe QiitaPost do
     end
   end
 
-  it "check set tag" do
-    [ # ["hoge, hoge2", "hoge, hoge2"], #[{:name=>""}, {:name=>""}]],
-     [["ruby", "qiita"], [{:name=>"ruby"}, {:name=>"qiita"}]]
-    ].each do |tags, res|
-      p [tags]
-      expect(@post.set_tags(tags)).to eq res
-    end
-  end
+#  it "check set tag" do
+ #   [ # ["hoge, hoge2", "hoge, hoge2"], #[{:name=>""}, {:name=>""}]],
+  #   [["ruby", "qiita"], [{:name=>"ruby"}, {:name=>"qiita"}]]
+   # ].each do |tags, res|
+    #  p [tags]
+     # expect(@post.set_tags(tags)).to eq res
+   # end
+  #end
 end

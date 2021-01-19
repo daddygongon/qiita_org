@@ -44,8 +44,16 @@ class QiitaPost
         tags << { name: tag.strip }
       end
     else
-      tags = tags.split(",").inject([]) do |l, c|
-        l << { name: c.strip } #, versions: []}
+      if tags.include?(",")
+        tags = tags.split(",").inject([]) do |l, c|
+          l << { name: c.strip } #, versions: []}
+        end
+      else
+        new_tags = tags
+        tags = []
+        new_tags.each do |tag|
+          tags << { name: tag.strip }
+        end
       end
     end
 
@@ -202,7 +210,7 @@ class QiitaPost
     end
     new_lines = File.readlines(@src)
     new_lines.each_with_index do |line, i|
-      if line.match(/\#\+(TAG|tag|Tag|tags|TAGS|Tags): (.+)/)
+      if line.match(/\#\+(TAG|tag|Tag|tags|TAGS|Tags):/)
         new_lines[i] = "#+TAG: #{new_tags.join(", ")}\n"
         break
       end
