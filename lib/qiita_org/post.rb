@@ -69,6 +69,8 @@ class QiitaPost
       string = STDIN.gets.chomp
       if string == 'e'
         count = 5
+      elsif (string == "" and count >= 1)
+        count = 5
       else
         tags << string
       end
