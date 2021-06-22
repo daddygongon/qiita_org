@@ -161,8 +161,8 @@ class QiitaPost
     else
       @path = "api/v2/items"
     end
-    p ["qiita", @qiita]
-    p ["path", @path]
+    p qiita: @qiita
+    p path: @path
     p @qiita + @path
     uri = URI.parse(@qiita + @path)
 
