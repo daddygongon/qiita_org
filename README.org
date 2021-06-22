@@ -1,4 +1,5 @@
-#+qiita_teams: 55b11d5449776ec36c77
+#+qiita_teams: 79f1efa6ca0083c9f210
+# +qiita_teams: 55b11d5449776ec36c77
 #+OPTIONS: ^:{}
 #+STARTUP: indent nolineimages
 #+TITLE: QiitaOrg
@@ -11,9 +12,9 @@
 
 
 * QiitaOrg
-[[https://img.shields.io/badge/MacOSX-10.13.3-brightgreen][Mac OS X-10.13.3]]
-[ruby-2.7.0p0](https://img.shields.io/badge/ruby-2.7.0p0-brightgreen)
-[qiita_org version](https://img.shields.io/badge/qiitaorg-0.1.8-brightgreen)
+https://img.shields.io/badge/MacOSX-10.13.3-brightgreen.svg https://img.shields.io/badge/ruby-2.7.0p0-brightgree.svg 
+https://img.shields.io/badge/qiitaorg-0.1.8-brightgreen.svg
+
 ** 概要
 qiita_orgはqiitaへの投稿にあたって，テキストの作成から投稿までを
 terminal上で一括で行いたいというコンセプトでできたgemです．
