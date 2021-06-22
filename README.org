@@ -6,10 +6,9 @@
 #+AUTHOR: hoge
 #+EMAIL:     (concat "")
 #+LANGUAGE:  jp
-# +OPTIONS:   H:4 toc:t num:2
+#+OPTIONS:   H:4 toc:t num:2
 #+OPTIONS:   toc:nil
 #+TAG: api, org, qmd
-
 
 * QiitaOrg
 https://img.shields.io/badge/MacOSX-10.13.3-brightgreen.svg https://img.shields.io/badge/ruby-2.7.0p0-brightgree.svg 
