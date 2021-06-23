@@ -11,4 +11,4 @@
 #+TWITTER: off
 # +SETUPFILE: ~/.emacs.d/org-mode/theme-readtheorg.setup
 
-[[file:./qiita_org/
+[[https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1185097/dc33cb5a-5004-72df-10f5-37e21cd49145.png][file:./qiita_orgg/slide_1.png]]
