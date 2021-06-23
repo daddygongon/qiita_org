@@ -1,14 +1,14 @@
-#+qiita_private: e199a57085723fe56dfa
+#+qiita_private: b0e3f4053940edb6fa0d
 #+OPTIONS: ^:{}
 #+STARTUP: indent nolineimages
 #+TITLE: title
-#+AUTHOR: Moeko Higashibata
-#+EMAIL:     (concat "ewh42930@kwansei.ac.jp")
+#+AUTHOR: Yoshimasa Yuri
+#+EMAIL:     (concat "yurimore.tm@gmail.com")
 #+LANGUAGE:  jp
 # +OPTIONS:   H:4 toc:t num:2
 #+OPTIONS:   toc:nil
 #+TAG: Qiita, org
 #+TWITTER: off
-# +SETUPFILE: ~/.emacs.d/org-mode/theme-readtheorg.setup
+# +SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 
-[[https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/636789/16c3ee73-120e-b4ba-937f-e32a41f3f0c6.png][file:./qiita_org/slide_1.png]]
+[[https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/789927/e888a647-bbc9-8610-3147-4b90f4960e8d.png][file:./qiita_org/slide_1.png]]
