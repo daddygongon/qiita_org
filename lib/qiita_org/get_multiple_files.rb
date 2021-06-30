@@ -29,7 +29,11 @@ class GetMultipleFiles
           qiita.run
         end
       elsif @type == "upload"
-        QiitaFileUpLoad.new(file, mode, @os).upload()
+        begin
+          QiitaFileUpLoad.new(file, mode, @os).upload()
+        rescue Exception => ex
+          puts ex.message.red
+        end
       end
     end
   end

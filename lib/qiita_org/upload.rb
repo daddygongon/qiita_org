@@ -23,8 +23,9 @@ class QiitaFileUpLoad
       puts "Overwrite file URL's on #{@src}? (y/n)".green
       ans = STDIN.getch
 
-      input_url_to_org(paths) if ans == "y"
+      input_url_to_org(paths) if ans[0].downcase == "y"
     end
+    true
   end
 
   def get_file_path(src)
@@ -45,11 +46,12 @@ class QiitaFileUpLoad
 
   def open_file_dir(paths)
     previous_paths = []
-    previous_paths << File.join(paths[0].split("/")[0..-2])
-    @base.file_open(@os, File.join(paths[0].split("/")[0..-2]))
+    #    previous_paths << File.join(paths[0].split("/")[0..-2])
+    #    @base.file_open(@os, File.join(paths[0].split("/")[0..-2]))
 
-    paths.each do |path|
+    [paths].flatten.each do |path| # previous need for ommit multiple open of the identical dir
       dir_path = File.join(path.split("/")[0..-2])
+      dir_path = "." if dir_path == ""
       unless previous_paths.include?(dir_path)
         previous_paths << dir_path
         @base.file_open(@os, dir_path)

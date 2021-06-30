@@ -1,0 +1,16 @@
+#+qiita_private: b94a530655335a7d774a
+#+OPTIONS: ^:{}
+#+STARTUP: indent nolineimages
+#+TITLE: title
+#+AUTHOR: Shigeto R. Nishitani
+#+EMAIL:     (concat "shigeto_nishitani@mac.com")
+#+LANGUAGE:  jp
+# +OPTIONS:   H:4 toc:t num:2
+#+OPTIONS:   toc:nil
+#+TAG: Qiita, upload
+#+TWITTER: off
+
+[[https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/151211/a3a7f387-d64c-0c79-b643-022daec784b3.png][file:upload.png]]
+
+
+

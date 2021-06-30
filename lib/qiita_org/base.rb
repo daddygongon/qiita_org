@@ -75,11 +75,12 @@ class QiitaBase
     return access_token, teams_url, display, ox_qmd_load_path
   end
 
-  def file_open(os, order)
+  def file_open(os, path)
+    p :open_path => path
     case os
-    when "mac"; system "open #{order}"
-    when "windows"; system "explorer.exe #{order}"
-    else; system "xdg-open #{order}"     end
+    when "mac"; system "open #{path}"
+    when "windows"; system "explorer.exe #{path}"
+    else; system "xdg-open #{path}"     end
   end
 
   def get_report_id(src, option)

@@ -57,7 +57,7 @@ module QiitaOrg
 
     def upload(*argv)
       os = @base.check_pc_os()
-
+      p :argv => argv
       if argv.size > 2
         GetMultipleFiles.new(argv, os, "upload").run()
       else #if argv.size > 1
@@ -67,7 +67,7 @@ module QiitaOrg
           p file = argv[0] || "README.org"
           p mode = argv[1] || @base.pick_up_option(file)
           begin
-            qiita = QiitaFileUpLoad.new(file, mode, os).upload()
+            QiitaFileUpLoad.new(file, mode, os).upload()
           rescue Exception => ex
             puts ex.message.red
           end
