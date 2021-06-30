@@ -3,7 +3,6 @@ require "qiita_org/error_message.rb"
 
 class QiitaBase
   def initialize()
-
   end
 
   def check_pc_os()
@@ -77,13 +76,10 @@ class QiitaBase
   end
 
   def file_open(os, order)
-    if os == "mac"
-      system "open #{order}"
-    elsif os == "windows"
-      system "explorer.exe #{order}"
-    else
-      system "xdg-open #{order}"
-    end
+    case os
+    when "mac"; system "open #{order}"
+    when "windows"; system "explorer.exe #{order}"
+    else; system "xdg-open #{order}"     end
   end
 
   def get_report_id(src, option)

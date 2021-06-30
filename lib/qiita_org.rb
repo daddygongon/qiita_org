@@ -66,8 +66,11 @@ module QiitaOrg
         else
           p file = argv[0] || "README.org"
           p mode = argv[1] || @base.pick_up_option(file)
-
-          qiita = QiitaFileUpLoad.new(file, mode, os).upload()
+          begin
+            qiita = QiitaFileUpLoad.new(file, mode, os).upload()
+          rescue Exception => ex
+            puts ex.message.red
+          end
         end
       end
     end
@@ -78,7 +81,7 @@ module QiitaOrg
       status = argv[0] || "local"
       option = argv[1] || nil
       input = [argv[2], argv[3], argv[4]]
-      config =  QiitaConfig.new(status, option, input)
+      config = QiitaConfig.new(status, option, input)
       config.run
     end
 
@@ -87,7 +90,7 @@ module QiitaOrg
     def get(*argv)
       p mode = argv[0] || "qiita"
       p id = argv[1] || nil
-      get =  QiitaGet.new(mode, id)
+      get = QiitaGet.new(mode, id)
       get.run
     end
 
@@ -96,7 +99,7 @@ module QiitaOrg
     def template(*argv)
       os = @base.check_pc_os()
       filename = argv[0] || "template.org"
-      filename = (filename.include?(".org"))? filename : "#{filename}.org"
+      filename = (filename.include?(".org")) ? filename : "#{filename}.org"
 
       template = QiitaGetTemplate.new(os, filename).run()
     end

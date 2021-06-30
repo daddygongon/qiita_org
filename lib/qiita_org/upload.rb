@@ -3,9 +3,9 @@ require "io/console"
 require "qiita_org/access_qiita.rb"
 
 class QiitaFileUpLoad
-  def initialize(src, option, os)
-    @src = src
-    @option = (option == "qiita" || option == "open")? "public" : option
+  def initialize(src, option, os = "mac")
+    p @src = src
+    @option = (option == "qiita" || option == "open") ? "public" : option
     @os = os
     @base = QiitaBase.new()
     @access_token, @teams_url, @display, @ox_qmd_load_path = QiitaBase.new().set_config()
@@ -14,7 +14,9 @@ class QiitaFileUpLoad
 
   def upload()
     paths = get_file_path(@src)
-    unless paths.empty?
+    if paths.empty?
+      raise RuntimeError.new "No upload file path in #{@src}."
+    else
       open_file_dir(paths)
       open_qiita()
 
@@ -22,8 +24,6 @@ class QiitaFileUpLoad
       ans = STDIN.getch
 
       input_url_to_org(paths) if ans == "y"
-    else
-      puts "file path is empty.".red
     end
   end
 
@@ -93,11 +93,11 @@ class QiitaFileUpLoad
   end
 
   def get_file_url(id, file_name)
-    qiita = (@option == "teams")? @teams_url : "https://qiita.com/"
+    qiita = (@option == "teams") ? @teams_url : "https://qiita.com/"
     path = "api/v2/items/#{@id}"
 
     items = @access.access_qiita()
-
+    puts items["body"].match?(/\!\[#{file_name}\]\(((.+))\)/)
     if items["body"].match?(/\!\[#{file_name}\]\(((.+))\)/)
       @file_url = items["body"].match(/\!\[#{file_name}\]\(((.+))\)/)[2]
       puts "Wrote #{file_name}'s URL".green
