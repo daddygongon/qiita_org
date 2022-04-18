@@ -243,7 +243,7 @@ class QiitaPost
 
     add_qiita_id_on_org()
 
-    system "rm #{@src.gsub(".org", ".md")}"
+#    system "rm #{@src.gsub(".org", ".md")}"
   end
 end
 
