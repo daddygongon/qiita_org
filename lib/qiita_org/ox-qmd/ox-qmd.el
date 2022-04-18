@@ -37,6 +37,8 @@
 
 
 ;;; User-Configurable Variables
+(setq org-src-preserve-indentation t 
+      org-edit-src-content-indentation t)
 
 (defvar ox-qmd-language-keyword-alist '(("emacs-lisp" . "el")))
 (defvar ox-qmd-unfill-paragraph t)
