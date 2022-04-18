@@ -1,5 +1,5 @@
 #+OPTIONS: ^:{}
-#+STARTUP: indent nolineimages
+#+STARTUP: indent nolineimages overview num
 #+TITLE: title
 #+AUTHOR: Your Name
 #+EMAIL:     (concat "hogehoge@example.com")
@@ -8,5 +8,5 @@
 #+OPTIONS:   toc:nil
 #+TAG: hoge, hoge2
 #+TWITTER: off
-# +SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 
