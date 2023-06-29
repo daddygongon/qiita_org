@@ -11,8 +11,8 @@
 #+TAG: api, org, qmd
 
 * qiita_org
-[[https://img.shields.io/badge/MacOSX-10.13.3-brightgreen.svg] [https://img.shields.io/badge/ruby-2.7.0p0-brightgree.svg] 
-[https://img.shields.io/badge/qiitaorg-0.1.8-brightgreen.svg]]
+[[https://img.shields.io/badge/MacOSX-10.13.3-brightgreen.svg]] [[https://img.shields.io/badge/ruby-2.7.0p0-brightgree.svg]]
+[[https://img.shields.io/badge/qiitaorg-0.1.8-brightgreen.svg]]
 
 ** 概要
 qiita_orgはqiitaへの投稿にあたって，テキストの作成から投稿までを
