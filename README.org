@@ -11,8 +11,8 @@
 #+TAG: api, org, qmd
 
 * qiita_org
-https://img.shields.io/badge/MacOSX-10.13.3-brightgreen.svg https://img.shields.io/badge/ruby-2.7.0p0-brightgree.svg 
-https://img.shields.io/badge/qiitaorg-0.1.8-brightgreen.svg
+[[https://img.shields.io/badge/MacOSX-10.13.3-brightgreen.svg]] [[https://img.shields.io/badge/ruby-2.7.0p0-brightgree.svg]]
+[[https://img.shields.io/badge/qiitaorg-0.1.8-brightgreen.svg]]
 
 ** 概要
 qiita_orgはqiitaへの投稿にあたって，テキストの作成から投稿までを
@@ -26,16 +26,19 @@ emacs org-modeで作成したテキストをCUIでqiitaに投稿します．
 
 まず，org-modeの投稿用テンプレートを取得します．
 'qiita template'とコマンドを打ち，環境を書き込むかを決めtemplate.orgを作成します．
-https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/76dc9d92-3a77-5523-7a21-571f691402bb.png
+
+[[https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/76dc9d92-3a77-5523-7a21-571f691402bb.png]]
 
 すると，このようなorgが作成されます．
-https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/4a38e62f-9cae-1bf1-ee51-080706c64f6f.png
+
+[[https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/4a38e62f-9cae-1bf1-ee51-080706c64f6f.png]]
 
 ここのtitle,tagをqiitaに載せる用のものに変更してあとは従来通り本文を書くだけ．
 
 本文が作成できたら，あとは投稿用のコマンドを実行するだけ．
 試しに限定共有投稿へ投稿してみるとこんな感じ．
-https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/3f7179f4-e150-7a63-b8ba-e936b925d7be.png
+
+[[https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/3f7179f4-e150-7a63-b8ba-e936b925d7be.png]]
 
 ズラズラーっと出ますが，設定がちゃんとできていれば投稿が完了し，
 Safariで投稿したページが開きます．
@@ -70,10 +73,12 @@ qiita config global
 [https://qiita.com/settings/applications](https://qiita.com/settings/applications)にて
 
 個人用アクセストークンの'新しくトークンを発行する'をクリック．
-https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/de93b61e-b42d-8364-7282-ee1bdbd572ad.png
+
+[[https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/de93b61e-b42d-8364-7282-ee1bdbd572ad.png]]
 
 アクセストークンの説明を書き，スコープのところは画像のように全てにチェックを入れる．その後発行をおす．
-https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/7012077d-fba8-e823-d29c-dc93939b4d6b.png
+
+[[https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/612049/7012077d-fba8-e823-d29c-dc93939b4d6b.png]]
 
 ページが移動すると個人用アクセストークンのところにアクセストークンが表示されているので，
 コピーしてください．（この文字列はページを移動すると再表示できなくなるので注意してください．）
