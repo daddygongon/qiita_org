@@ -88,7 +88,6 @@ class QiitaPost
 
   # add source path in md
   def add_source_path_in_md()
-    @lines = File.readlines(@src.gsub(".org", ".md"))
     path = Dir.pwd.gsub(ENV["HOME"], "~")
     @lines << "\n\n------\n - **source** #{path}/#{@src}\n"
   end
@@ -230,6 +229,7 @@ class QiitaPost
     end
 
     convert_org_to_md()
+    @lines = File.readlines(@src.gsub(".org", ".md"))
     add_source_path_in_md() if @insert_source == "yes"
     @lines = MdConverter.new().convert_for_image(@lines)
     @qiita_id, @patch = select_patch_or_post(@src, @option)
