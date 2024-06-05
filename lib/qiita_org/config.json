@@ -5,4 +5,5 @@
     "teams_url": "",
     "display": "open",
     "ox_qmd_load_path": "~/.emacs.d/site_lisp/ox-qmd"
+    "insert_source": "yes"
 }
