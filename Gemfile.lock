@@ -1,11 +1,11 @@
 PATH
   remote: .
   specs:
-    qiita_org (0.2.2)
+    qiita_org (0.2.3)
       colorize
       command_line (> 2.0.0)
       fileutils
-      thor
+      thor (>= 1.4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -60,7 +60,7 @@ GEM
       rspec-support (~> 3.13.0)
     rspec-support (3.13.1)
     shellany (0.0.1)
-    thor (1.3.1)
+    thor (1.4.0)
     yard (0.9.36)
     yard-activesupport-concern (0.0.1)
       yard (>= 0.8)
@@ -80,4 +80,4 @@ DEPENDENCIES
   yard-activesupport-concern
 
 BUNDLED WITH
-   2.5.6
+   2.5.21
