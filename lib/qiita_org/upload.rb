@@ -8,7 +8,7 @@ class QiitaFileUpLoad
     @option = (option == "qiita" || option == "open") ? "public" : option
     @os = os
     @base = QiitaBase.new()
-    @access_token, @teams_url, @display, @ox_qmd_load_path = QiitaBase.new().set_config()
+    @access_token, @teams_url, @display, @ox_qmd_load_path, @insert_source = QiitaBase.new().set_config()
     ErrorMessage.new().teams_url_error(@teams_url) if @option == "teams"
   end
 

@@ -69,10 +69,11 @@ class QiitaBase
     teams_url = conf["teams_url"]
     display = conf["display"]
     ox_qmd_load_path = File.join(lib, "qiita_org", "ox-qmd", "ox-qmd")
+    insert_source = conf["insert_source"]
 
     ErrorMessage.new().access_token_error(access_token)
 
-    return access_token, teams_url, display, ox_qmd_load_path
+    return access_token, teams_url, display, ox_qmd_load_path, insert_source
   end
 
   def file_open(os, path)
