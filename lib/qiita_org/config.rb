@@ -23,7 +23,7 @@ class QiitaConfig
     lib = File.expand_path("../../../lib", __FILE__)
     cp_file = File.join(lib, "qiita_org", ".qiita.conf")
 
-    if File.exists?(@setup) # "# {ENV["HOME"]}/.qiita.conf")
+    if File.exist?(@setup) # "# {ENV["HOME"]}/.qiita.conf")
       puts @setup.green
       print_config("now", "black")
     else

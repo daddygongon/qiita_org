@@ -63,7 +63,7 @@ class QiitaGetTemplate
     lib = File.expand_path("../../../lib", __FILE__)
     cp_file = File.join(lib, "qiita_org", "template.org")
 
-    if File.exists?("./#{@filename}")
+    if File.exist?("./#{@filename}")
       puts "#{@filename} exists.".red
       exit
     else

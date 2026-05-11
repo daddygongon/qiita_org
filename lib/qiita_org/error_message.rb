@@ -79,8 +79,8 @@ class ErrorMessage
     end
   end
 
-  def md_file_exists?(src, res)
-    unless File.exists?(src.gsub(".org", ".md"))
+  def md_file_exist?(src, res)
+    unless File.exist?(src.gsub(".org", ".md"))
       puts "Can not convert org doc to markdown.".red
       puts 'Please confirm emacs version above 26.'.red
       puts "Next, check links in the org doc, as converting in emacs by 'ctrl+c, ctrl+e, h, o'.".red

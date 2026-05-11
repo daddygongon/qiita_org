@@ -83,7 +83,7 @@ class QiitaPost
   def convert_org_to_md()
     command = "emacs #{@src} --batch -l #{@ox_qmd_load_path} -f org-qmd-export-to-markdown --kill"
     res = command_line command
-    ErrorMessage.new().md_file_exists?(@src, res)
+    ErrorMessage.new().md_file_exist?(@src, res)
   end
 
   # add source path in md

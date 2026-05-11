@@ -7,7 +7,7 @@ class SearchConfPath
 
   def search_conf_path()
     while @dir != @home
-      if File.exists?(File.join(@dir, ".qiita.conf"))
+      if File.exist?(File.join(@dir, ".qiita.conf"))
         return @dir
       else
         @dir = @dir.match(/(.+)\//)[1]
